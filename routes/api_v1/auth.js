@@ -6,7 +6,7 @@ module.exports = function(router) {
 	var passport = require('passport');
 	require('../../config/passport')(passport);
 	var jwt = require('jwt-simple');
-	var config = require('../config/database');
+	var config = require('../../config/database');
 	
 	router.post('/signup', function(req, res) {
 		if (!req.body.name || !req.body.password) {
