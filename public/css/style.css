@@ -1,0 +1,194 @@
+/* @import url(http://fonts.googleapis.com/css?family=Lobster); */
+html, body {
+  background: black;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: helvetica neue, helvetica;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
+  text-align: center;
+  }
+
+input,
+button {
+  -webkit-appearance: none;
+  height: 60px;
+  min-width: 100px;
+  background: white;
+  border-radius: 4px;
+  border: none;
+  color: #555;
+  font-weight: bold;
+  padding: 0 15px; }
+
+
+#start_btn {
+	postion:absolute;
+	top:50%;
+	margin:120px;
+}
+
+@-webkit-keyframes stepping {
+  from {
+    left: 0%; }
+
+  to {
+    left: 100%; } }
+
+@-webkit-keyframes beat {
+  from {
+    background: white; }
+
+  to {
+    background: rgba(255, 255, 255, 0); } }
+
+/* .beat { */
+/*   -webkit-animation-name: beat; */
+/*   -webkit-animation-timing-function: ease-out; */
+/*   -webkit-animation-iteration-count: 1; */
+/*   -webkit-animation-duration: .6s; */
+/*   -webkit-transform: translateZ(0); */
+/*     -moz-transform: translateZ(0); */
+/*     -ms-transform: translateZ(0); */
+/*     -o-transform: translateZ(0); */
+/*     transform: translateZ(0); */
+  
+/*   } */
+
+#login {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8); }
+  #login .form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    margin-left: -150px;
+    margin-top: -100px; }
+
+#roomId {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  text-shadow: 1px 1px 1px black;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text; }
+  #roomId div {
+    position: absolute;
+    width: 750px;
+    top: 50%;
+    left: 50%;
+    margin-left: -375px;
+    margin-top: -320px;
+    color: #ccc;
+    font-size: 15px;
+    text-align: center;
+    font-family: Arial; }
+    #roomId div b {
+      font-size: 22px;
+      color: #fff; }
+    #roomId div a:link,
+    #roomId div a:visited {
+      color: #00f797;
+      text-decoration: none; }
+    #roomId div h1 {
+      color: #fff;
+      font-family: 'Lobster'; }
+    #roomId div h2 {
+      color: #fff;
+      font-family: Arial; }
+    #roomId div .copyright {
+      font-size: 13px;
+      color: #999; }
+      #roomId div .copyright a:link,
+      #roomId div .copyright a:visited {
+        color: #ccc;
+        text-decoration: none; }
+
+#pattern-editor,
+#sequencer-view {
+  height: 100%;
+  display: block; }
+  #pattern-editor table,
+  #sequencer-view table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse; }
+  #pattern-editor thead th,
+  #sequencer-view thead th {
+    height: 10px; }
+    #pattern-editor thead th#playhead,
+    #sequencer-view thead th#playhead {
+      position: relative;
+      left: 0%;
+      top: 0;
+      height: 20px;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-duration: 2s;
+      background-color: #C8DEC0; }
+  #pattern-editor td,
+  #sequencer-view td {
+    border: 1px solid #333333;
+    background: #000;
+    /* mark 1st beat in bars
+    &:nth-child(2) {
+      border-left: 1px solid #f9f9f9;
+    }
+    &:nth-child(9) {
+      border-right: 1px solid #f9f9f9;
+    }*/ }
+    #pattern-editor td:nth-child(1), #pattern-editor td:active, #pattern-editor td.active,
+    #sequencer-view td:nth-child(1),
+    #sequencer-view td:active,
+    #sequencer-view td.active {
+      background: transparent;
+      position: relative;
+      /* gloss
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        background: rgba(255, 255, 255, .1);
+        top: 0;
+      }*/ }
+    #pattern-editor td:nth-child(1),
+    #sequencer-view td:nth-child(1) {
+      width: 60px; }
+      #pattern-editor td:nth-child(1) h1,
+      #sequencer-view td:nth-child(1) h1 {
+        font-size: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 60px;
+        padding: 0 5px;
+        box-sizing: border-box;
+        text-shadow: 0 1px #aaaaaa;
+        margin: 0;
+        text-align: center; }
+      @media (min-width: 580px) {
+        #pattern-editor td:nth-child(1),
+        #sequencer-view td:nth-child(1) {
+          width: 100px; }
+          #pattern-editor td:nth-child(1) h1,
+          #sequencer-view td:nth-child(1) h1 {
+            font-size: 16px;
+            width: 100px; } }

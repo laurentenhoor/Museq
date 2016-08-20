@@ -1,0 +1,2 @@
+supervisor server.js
+pause
