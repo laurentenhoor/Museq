@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-require('./api_v1/auth')(router);
-require('./api_v1/track')(router);
+var passport = require('passport');
+require('../config/passport')(passport);
+
+require('./api_v1/auth')(router, passport);
+require('./api_v1/song')(router, passport);
 
 module.exports = router;
