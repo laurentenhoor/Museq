@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+var config = require('../config/database');
+mongoose.connect(config.database);
+
 var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
- 
 
 // set up a mongoose model
 var UserSchema = new Schema({
