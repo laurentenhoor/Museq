@@ -6,7 +6,7 @@ module.exports = function(router, passport) {
 	var config = require('../../config/database');
 	
 	var authUtil = require('./authUtil');
-	
+
 	
 	router.post('/signup', function(req, res) {
 		if (!req.body.name || !req.body.password) {
@@ -49,11 +49,6 @@ module.exports = function(router, passport) {
 				});
 			}
 		});
-	});
-
-	
-	router.get('/memberinfo', passport.authenticate('jwt', { session: false}), function(req, res) {		
-		res.json({success: true, msg: 'Welcome in the member area: '+ authUtil.getUserFromRequest(req) +'!'});
 	});
 
 }

@@ -492,7 +492,7 @@
         if (_started) return;
         _started = true;
         _noteTime = 0.0;
-        // _startTime = _context.currentTime + 0.160;
+        // _startTime = _context.currentTime + 0.160;	
         _startTime = _context.currentTime + 0.005;
         _startTimeDraw = Date.now()/1000 + 0.005;
         _self.schedule();
@@ -599,14 +599,23 @@
     	
         console.log('update note', data);
       
-
         var trackId = data.trackId.split('-')[1];
         var instrumentId = data.trackId.split('-')[0];
         // TODO check the values MTF
         
         _instruments[instrumentId].tracks[trackId].notes[data.note] = data.volume;
         // _instruments[instrumentId].tracks[trackId].notes[data.noteId] = data.volume;
-   
+        
+        $.ajax({
+    	  url: "./api/v1/beat/",
+    	  contentType:"application/json; charset=utf-8",
+    	  method: "POST",
+    	  data : JSON.stringify(_instruments),
+    	  context: document.body
+    	}).done(function(data) {
+    	  console.log('Succesfull data post!');
+    	});
+        
     };
 
     this.updateFxParam = function(data) {
