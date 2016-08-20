@@ -3,17 +3,22 @@ module.exports = function(router, passport) {
 	var authUtil = require('./authUtil');
 	var Beat = require('../../models/beat')
 	
-	router.get('/beat/latest', passport.authenticate('jwt', { session: false}), function(req, res) {
+	router.get('/beat/auth', passport.authenticate('jwt', { session: false}), function(req, res) {
 		res.send('Successful authorization of: '+ authUtil.getUserFromRequest(req));
+	});
+	
+	router.get('/beat', function(req, res) {
+		
+		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
+		  res.json( data.instruments );
+		});
+		
 	});
 
 	router.post('/beat', function(req, res) {
 
-		console.log('post /beat');
 		var user = authUtil.getUserFromRequest(req);
-		console.log(user);
 		var beat = req.body;
-		console.log(beat);
 		
 		var newBeat = new Beat({
 			username: user,
