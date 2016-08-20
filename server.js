@@ -17,6 +17,10 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(passport.initialize());
 
+var mongoose = require('mongoose');
+var config = require('./config/database');
+mongoose.connect(config.database);
+
 var portNr 		= 80;
 
 app.listen(portNr, function () {

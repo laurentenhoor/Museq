@@ -613,7 +613,7 @@
     	  data : JSON.stringify(_instruments),
     	  context: document.body
     	}).done(function(data) {
-    	  console.log('Succesfull data post!');
+    	  console.log(data);
     	});
         
     };
