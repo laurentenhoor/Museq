@@ -47,6 +47,9 @@
         _sequencerView.drawPlayhead(beat);
 //        _conn.execute(mixr.enums.Events.SEQUENCER_BEAT, {beat: beat});
       });
+      _sequencer.on(mixr.enums.Events.LOAD_PATTERN, function(instruments) {
+          _sequencerView.redrawNotes(instruments);
+        });
       
       var dummy = {};
       dummy.client = 1;

@@ -620,10 +620,6 @@
         
     };
     
-    this.redrawNotes = function() {
-    	
-    };
-    
     
     this.loadBeat = function() {
     	
@@ -632,16 +628,17 @@
       	  contentType:"application/json; charset=utf-8",
       	  method: "GET",
       	  context: document.body
-      	}).done(function(data) {
+      	}).done(function(instruments) {
       	  
-      		console.log(data);
+      		console.log(instruments);
       		
-      		$.each(data, function(instrument_key, instrument) {
+      		$.each(instruments, function(instrument_key, instrument) {
       			$.each(instrument.tracks, function(track_key, track) {
       				_instruments[instrument_key].tracks[track_key].notes = track.notes;
       			})
-      			
       		});
+      		
+      		_self.emit(mixr.enums.Events.LOAD_PATTERN, instruments);
       	  
       	});
     	

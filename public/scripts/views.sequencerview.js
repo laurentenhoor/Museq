@@ -56,6 +56,30 @@
           $table.on('click', 'td', _onToggleNote);
           $table.on('click', 'td:nth-child(1)', _self.scrollInstrument)
         };
+        
+      this.redrawNotes = function(instruments) {
+    	  
+			$.each(instruments, function(instrument_key, instrument) {
+	  			$.each(instrument.tracks, function(track_key, track) {
+	  				
+	  				var $track = $('tr[data-track-id= ' + instrument_key + '-' +track_key + ']');	
+	  				
+	  				$.each(track.notes, function(note_key, note) {
+	  					// TODO: draw every note active or non-active
+	  					 var $note = $track.find('td:nth-child(' + (note_key + 2) + ')');
+	  					 
+	  					 if (note) {
+	  						$note.addClass('active');	 
+	  					 } else {
+	  						$note.removeClass('active');
+	  					 }
+	  					 
+	  					
+	  				})
+	  			})
+	  		});
+    	  
+      };
 
 
       this.scrollInstrument = function() {

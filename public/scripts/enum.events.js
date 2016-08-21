@@ -94,7 +94,10 @@
 
     SEQUENCER_BEAT: 'seq_beat',
 
-    MODIFIER_CHANGE: 'modifier_change'
+    MODIFIER_CHANGE: 'modifier_change',
+    
+    LOAD_PATTERN: 'load_pattern'
+    	
   };
 
 }());
