@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//set up a mongoose model
 var BeatSchema = new Schema({
 	username: {
 		type: String,
