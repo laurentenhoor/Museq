@@ -1,0 +1,13 @@
+=	Save track
+	=	Login / Usermanagement
+= 	Load track
+=	Vote tracks
+	=	Play track without view
+	=	Save votes
+= 	View version tree
+
+
+Save track
+1) Click save button
+2) Create username (+password?) - High-score machine without password
+3) Load track
