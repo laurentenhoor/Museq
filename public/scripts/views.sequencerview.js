@@ -65,7 +65,7 @@
 	  				var $track = $('tr[data-track-id= ' + instrument_key + '-' +track_key + ']');	
 	  				
 	  				$.each(track.notes, function(note_key, note) {
-	  					// TODO: draw every note active or non-active
+
 	  					 var $note = $track.find('td:nth-child(' + (note_key + 2) + ')');
 	  					 
 	  					 if (note) {
@@ -75,8 +75,8 @@
 	  					 }
 	  					 
 	  					
-	  				})
-	  			})
+	  				});
+	  			});
 	  		});
     	  
       };
