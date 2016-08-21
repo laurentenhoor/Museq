@@ -487,9 +487,11 @@
     };
 
     this.start = function() {
-        console.log('Started!', this);
         
         if (_started) return;
+        console.log('Started!', this);
+        _self.loadBeat();
+        
         _started = true;
         _noteTime = 0.0;
         // _startTime = _context.currentTime + 0.160;	
@@ -617,6 +619,35 @@
     	});
         
     };
+    
+    this.redrawNotes = function() {
+    	
+    };
+    
+    
+    this.loadBeat = function() {
+    	
+        $.ajax({
+      	  url: "./api/v1/beat/",
+      	  contentType:"application/json; charset=utf-8",
+      	  method: "GET",
+      	  context: document.body
+      	}).done(function(data) {
+      	  
+      		console.log(data);
+      		
+      		$.each(data, function(instrument_key, instrument) {
+      			$.each(instrument.tracks, function(track_key, track) {
+      				_instruments[instrument_key].tracks[track_key].notes = track.notes;
+      			})
+      			
+      		});
+      	  
+      	});
+    	
+    	
+    };
+    
 
     this.updateFxParam = function(data) {
         console.log('update fx param', data);
@@ -640,7 +671,6 @@
     }
 
     this.initialize();
-    this.start();
     
   };
 
