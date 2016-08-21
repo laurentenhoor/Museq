@@ -1,11 +1,13 @@
 =	Save track
 	=	Login / Usermanagement
 = 	Load track
+
+=   Detect # of changes
+=	Submit for review system
 =	Vote tracks
 	=	Play track without view
 	=	Save votes
 = 	View version tree
-
 
 Save track
 1) Click save button
