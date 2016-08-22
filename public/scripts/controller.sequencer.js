@@ -638,7 +638,7 @@
       			})
       		});
       		
-      		_self.emit(mixr.enums.Events.LOAD_PATTERN, instruments);
+      		_self.emit(mixr.enums.Events.LOAD_PATTERN, _instruments);
       	  
       	});
     	
