@@ -19,6 +19,7 @@ User Flow Scenario:
 
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
+		Start your contribution to the perfect song...
 			
 	a)	[*Play 3 alternative songs*] Select your preference and improve it!
 		NEW-USER) Create account to store your improvement
