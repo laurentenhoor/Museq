@@ -14,10 +14,11 @@ User Flow Scenario:
 
 1) Homescreen
 	Explaination screen: 
-		
+
 		Humanity is teaming up to create the one and only perfect music composition.
+
+		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
-		We have bundled the power of both evolution and democracy into 'Museq'. A tool that lets you mutate a music composition and allows the crowd to 'naturally' select the strongest version!
 			
 	a)	[*Play 3 alternative songs*] Select your preference and improve it!
 		NEW-USER) Create account to store your improvement
