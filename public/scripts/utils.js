@@ -5,7 +5,7 @@
    * @constructor
    * @class Utils
    */
-  mixr.Utils = new function() {
+  museq.Utils = new function() {
 
     /**
      * Parses a url and returns an object containing the folowing

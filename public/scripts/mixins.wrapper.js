@@ -6,12 +6,12 @@
    * @constructor
    * @class Player
    */
-  mixr.mixins.Wrapper = function() {
+  museq.mixins.Wrapper = function() {
 	  
     /**
      * Mixins
      */
-    mixr.mixins.EventTarget.call(this);
+    museq.mixins.EventTarget.call(this);
 
   };
 

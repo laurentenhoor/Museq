@@ -1,64 +1,64 @@
 //window.SERVER = 'http://localhost:60000';
 //window.CLIENTS = 'http://localhost/stepdaddy';
 /**
- * The mixr namespace
+ * The museq namespace
  * @type {Object}
  */
-var mixr = mixr || {};
+var museq = museq || {};
 
 /**
  * The audio namespace
  * @type {Object}
  */
-mixr.audio = mixr.audio || {};
+museq.audio = museq.audio || {};
 
 /**
  * The views namespace
  * @type {Object}
  */
-mixr.views = mixr.views || {};
+museq.views = museq.views || {};
 
 /**
  * The controllers namespace
  * @type {Object}
  */
-mixr.controllers = mixr.controllers || {};
+museq.controllers = museq.controllers || {};
 
 /**
  * The commands namespace
  * @type {Object}
  */
-mixr.commands = mixr.commands || {};
+museq.commands = museq.commands || {};
 
 /**
  * The models namespace
  * @type {Object}
  */
-mixr.models = mixr.models || {};
+museq.models = museq.models || {};
 
 /**
  * The net namespace
  * @type {Object}
  */
-mixr.net = mixr.net || {};
+museq.net = museq.net || {};
 
 /**
  * The mixins namespace
  * @type {Object}
  */
-mixr.mixins = mixr.mixins || {};
+museq.mixins = museq.mixins || {};
 
 /**
  * The enum namespace
  * @type {Object}
  */
-mixr.enums = mixr.enums || {};
+museq.enums = museq.enums || {};
 
 /**
  * The ui namespace
  * @type {Object}
  */
-mixr.ui = mixr.ui || {};
+museq.ui = museq.ui || {};
 
 // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating

@@ -10,7 +10,7 @@
    * @constructor
    * @class EventTarget
    */
-  mixr.mixins.EventTarget = function() {
+  museq.mixins.EventTarget = function() {
 
     /**
      * Holds all the callbacks for all the events.

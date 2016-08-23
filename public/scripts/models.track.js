@@ -6,7 +6,7 @@
    * @constructor
    * @class Track
    */
-  mixr.models.Track = function(id, name, notes, sampleUrl, volume) {
+  museq.models.Track = function(id, name, notes, sampleUrl, volume) {
 
     var _buffer = null;
     var _self = this;
@@ -14,7 +14,7 @@
     /**
      * Mixins
      */
-    mixr.mixins.Wrapper.call(this);
+    museq.mixins.Wrapper.call(this);
 
     this.id = id || '';
     this.name = name || '';
@@ -29,7 +29,7 @@
      *
      * @public
      * @function
-     * @return {mixr.controllers.Track} This instance of the model.
+     * @return {museq.controllers.Track} This instance of the model.
      */
     this.initialize = function(sampleUrl) {
       this.sampleUrl = sampleUrl;

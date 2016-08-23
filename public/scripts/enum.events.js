@@ -4,7 +4,7 @@
    * The events object holds all the enumrations for different events.
    * @type {Object}
    */
-  mixr.enums.Events = {
+  museq.enums.Events = {
 
     /**
      * The BYEBYE enum

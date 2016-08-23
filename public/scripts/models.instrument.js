@@ -6,12 +6,12 @@
    * @constructor
    * @class Instrument
    */
-  mixr.models.Instrument = function(id, name, tracks, volume, type, color) {
+  museq.models.Instrument = function(id, name, tracks, volume, type, color) {
 
     /**
      * Mixins
      */
-    mixr.mixins.Wrapper.call(this);
+    museq.mixins.Wrapper.call(this);
 
     this.id = id.toString() || '';
     this.name = name || '';
@@ -33,7 +33,7 @@
      *
      * @public
      * @function
-     * @return {mixr.controllers.Intrument} This instance of the model.
+     * @return {museq.controllers.Intrument} This instance of the model.
      */
     this.initialize = function(readyCallback) {
       _readyCallback = readyCallback;

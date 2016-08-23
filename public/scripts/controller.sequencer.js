@@ -1,11 +1,11 @@
 (function() {
 
-  mixr.Sequencer = function(conn) {
+  museq.Sequencer = function(conn) {
 
     /**
      * Mixins
      */
-    mixr.mixins.EventTarget.call(this);
+    museq.mixins.EventTarget.call(this);
 
     var _clients = {};
     var _instruments = [];
@@ -400,7 +400,7 @@
         _instruments = [];
         for (var i = 0; i < instrumentsConfig.length; i++) {
             var tracks = this.createTracks(i, instrumentsConfig[i].tracks, instrumentsConfig[i].type);
-            var instrument = new mixr.models.Instrument(i, instrumentsConfig[i].name, tracks, 1.0, instrumentsConfig[i].type, instrumentsConfig[i].color);
+            var instrument = new museq.models.Instrument(i, instrumentsConfig[i].name, tracks, 1.0, instrumentsConfig[i].type, instrumentsConfig[i].color);
             _instruments.push(instrument);
         };
 
@@ -414,9 +414,9 @@
             var config = tracksConfig[i];
 
             if (type === 'samples') {
-                var track = new mixr.models.Track(instrumentId + '-' + i, config.name, null, samplesPath + config.sampleUrl, 1.0);
+                var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, samplesPath + config.sampleUrl, 1.0);
             } else {
-                var track = new mixr.models.Track(instrumentId + '-' + i, config.name, null, null, 1.0);
+                var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, null, 1.0);
                 track.note = config.note;
                 console.log('track', track);
             };
@@ -540,9 +540,9 @@
             if (_noteTime != _lastDrawTime) {
                 _lastDrawTime = _noteTime;
 //                setInterval(function(){
-//                	_self.emit(mixr.enums.Events.SEQUENCER_BEAT, _noteIndex);
+//                	_self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
 //                }, 5);
-                _self.emit(mixr.enums.Events.SEQUENCER_BEAT, _noteIndex);
+                _self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
                 
             }
             _self.step();
@@ -620,6 +620,12 @@
         
     };
     
+    this.playBeat = function() {
+    	
+    	
+    	
+    };
+    
     
     this.loadBeat = function() {
     	
@@ -638,7 +644,7 @@
       			})
       		});
       		
-      		_self.emit(mixr.enums.Events.LOAD_PATTERN, _instruments);
+      		_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
       	  
       	});
     	

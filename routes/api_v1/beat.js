@@ -10,7 +10,18 @@ module.exports = function(router, passport) {
 	router.get('/beat', function(req, res) {
 		
 		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
-		  res.json( data.instruments );
+		  res.json( data );
+		});
+		
+	});
+
+	router.get('/vote', function(req, res) {
+		
+		var beats = [];
+		
+		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
+			beats.push(data);
+			res.json( beats );
 		});
 		
 	});

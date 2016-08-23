@@ -7,12 +7,12 @@
    * @class SequencerView
    * @param {Object} id The id of this specific connection.
    */
-  mixr.views.SequencerView = function(el) {
+  museq.views.SequencerView = function(el) {
 
     /**
      * Mixins
      */
-    mixr.mixins.Wrapper.call(this);
+    museq.mixins.Wrapper.call(this);
 
     var _self = this;
 
@@ -38,7 +38,7 @@
         
         var isItOn = $(this).toggleClass('active').hasClass('active');
         console.log('You clicked me dude', this, noteIndex, $(this).parent().index(), isItOn ? 1 : 0);
-        _self.emit(mixr.enums.Events.NOTE, {
+        _self.emit(museq.enums.Events.NOTE, {
           volume: isItOn ? 1 : 0,
           note: noteIndex,
           trackId: $(this).parent().data('trackId')
@@ -183,7 +183,7 @@
 
     /**
      * Shows an HTML element
-     * @return {mixr.views.SequencerView} A reference to this instance.
+     * @return {museq.views.SequencerView} A reference to this instance.
      */
     this.show = function() {
       $el.show();
@@ -200,7 +200,7 @@
      *
      * @private
      * @function
-     * @return {mixr.views.SequencerView} A reference to this instance.
+     * @return {museq.views.SequencerView} A reference to this instance.
      */
     this.initialize = function() {
     	_addEventListeners();
