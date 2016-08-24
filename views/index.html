@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <button id="start_btn" style="display:none">Start</button>
+<!--   <button id="start_btn" style="display:none">Start</button> -->
 
   <section id="museq">
     <table>
@@ -36,6 +36,7 @@
   <script src="scripts/views.voteview.js"></script>
   
   <script src="scripts/controller.sequencer.js"></script>
+  <script src="scripts/controller.vote.js"></script>
   <script src="scripts/controller.player.js"></script>
   <script src="scripts/controller.app.js"></script>
 
@@ -64,7 +65,7 @@
 // 		})	
 // 	});
 	
-	new museq.App().initialize('museq');
+	new museq.App('#museq')
 		
 	
 	var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&

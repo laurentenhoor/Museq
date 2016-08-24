@@ -15,7 +15,7 @@ module.exports = function(router, passport) {
 		
 	});
 
-	router.get('/vote', function(req, res) {
+	router.get('/beats_to_vote', function(req, res) {
 		
 		var beats = [];
 		

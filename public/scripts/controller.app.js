@@ -1,13 +1,14 @@
 (function() {
 
-  museq.App = function(targetId) {
+  museq.App = function(targetEl) {
 
-    var _room_id = 'museq_room_1';
+//    var _room_id = 'museq_room_1';
 
     var _instruments = {};
     var _totalInstruments = 0;
     var _sequencer;
     var _sequencerView;
+    var _el = targetEl;
 
     var _onGetInstrument = function(data) {
       console.log('Got a request for an instrument', data);
@@ -39,18 +40,14 @@
 //      .on(museq.enums.Events.MODIFIER_CHANGE, _onModifierChange);
 
     	$.ajax({
-  		  url: "./api/v1/vote/",
+  		  url: "./api/v1/beats_to_vote/",
   		  contentType:"application/json; charset=utf-8",
   		  method: "GET",
   		  context: document.body
   		}).done(function(beats_to_vote) {
   			
-  			console.log(beats_to_vote);
-  			
-  			$.each(beats_to_vote, function(beat_key, beat) {
-  				new museq.views.VoteView(new museq.Player(beat.instruments));
-  			});
-  			
+			_voteView = new museq.views.VoteView(_el, new museq.Vote(beats_to_vote));
+  	
   		});
     	
     	
@@ -80,6 +77,8 @@
 //      _sequencerView.scrollInstrument();
  
     };
+    
+    this.initialize();
 
   };
 
