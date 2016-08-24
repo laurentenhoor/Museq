@@ -19,8 +19,9 @@ module.exports = function(router, passport) {
 					getVariantCount(status);
 				});
 			} else {
-				getV	ariantCount(status);
+				getVariantCount(status);
 			}
+			
 			
 			function getVariantCount(status) {
 				
@@ -35,8 +36,6 @@ module.exports = function(router, passport) {
 					res.json(count);
 					
 				});
-				
-				
 				
 				
 			}
