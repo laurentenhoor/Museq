@@ -21,6 +21,24 @@
 		$parent.append($('<div>').attr('id', 'voteView'));
 		var $voteView = $parent.find('#voteView');
 		
+	
+		/**
+		 * Initializes the component
+		 *
+		 * @private
+		 * @function
+		 * @return {museq.views.VoteView} A reference to this instance.
+		 */
+		this.initialize = function() {
+			_addEventListeners();
+			_addButtons();
+			
+			this.show();
+
+			return this;
+		};
+		
+		
 		var _addButtons = function() {
 			
 			console.log('_addButtons()');
@@ -49,7 +67,7 @@
 						$currBtn.text('Play');
 						$('button.play').removeClass('disabled');
 					});
-					$currBtn.text('Stop');
+					$currBtn.text('...');
 				});
 				
 				$voteBtn.on('click', function(){
@@ -88,22 +106,7 @@
 			$voteView.hide();
 			return this;
 		};
-		/**
-		 * Initializes the component
-		 *
-		 * @private
-		 * @function
-		 * @return {museq.views.VoteView} A reference to this instance.
-		 */
-		this.initialize = function() {
-			_addEventListeners();
-			_addButtons();
-			
-			this.show();
-
-			return this;
-		};
-		
+	
 		this.initialize();
 
 	};
