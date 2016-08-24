@@ -24,7 +24,10 @@ button {
   border: none;
   color: #555;
   font-weight: bold;
-  padding: 0 15px; }
+  padding: 0 0px; 
+  margin:10px;
+  }
+  
 
 
 #start_btn {
