@@ -83,11 +83,31 @@
 
         return tracks;
     };
+    
+    
+    this.stop = function() {
+
+    	_started = false;
+    	_noteIndex = 0;
+    };
+    
+
+    _stopCallback = null;
+    _twoBeatsIndex = 0;
+    
+    this.startTwoBeats = function(stopCallback) {
+    	
+    	this.start();
+    	_stopCallback = stopCallback;
+    	
+    	
+    };
 
 
     this.start = function() {
         
         if (_started) return;
+        
         console.log('Started!', this);
         _self.loadBeat();
         
@@ -148,7 +168,9 @@
             
         }
         
-        requestAnimationFrame(_self.schedule);
+        if (_started) {
+        	requestAnimationFrame(_self.schedule);
+        };
         
     };
 
@@ -189,9 +211,17 @@
         var secondsPerBeat = 60.0 / _tempo;
         _noteTime = _noteTime + 0.25 * secondsPerBeat;
         _noteIndex++;
+        
 
         if (_noteIndex == _loopLength) {
             _noteIndex = 0;
+            _twoBeatsIndex++;
+            if (_twoBeatsIndex > 1) {
+            	_stopCallback();
+//            	_stopCallback = null;
+            	_twoBeatsIndex = 0;
+            	
+            }
             // pattern++;
         }
     };

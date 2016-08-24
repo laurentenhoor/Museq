@@ -24,6 +24,13 @@
     };
     
     
+    this.stopAllBeats = function() {
+    	$.each(_playableBeats, function(beatKey, beat){
+    		beat.player.stop();
+    	});
+    };
+    
+    
     this.vote = function(beat) {
     	console.log("TODO: Vote for beat with _id: "+ beat._id)
     };

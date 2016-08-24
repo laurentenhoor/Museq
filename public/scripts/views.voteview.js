@@ -24,22 +24,38 @@
 		var _addButtons = function() {
 			
 			console.log('_addButtons()');
-		
+			
+			function btnDefault() {
+				$('button.play').text('Play')
+			};
+			
+			
 			$.each(_voteController.getBeats(), function(beatKey, beat) {
 				
-				$playBtn = $('<button>').text('Play');
-				$voteBtn = $('<button>').text('Vote');
+				$playBtn = $('<button>').addClass('play').text('Play');
+				$voteBtn = $('<button>').addClass('vote').text('Vote');
 				
 				$playBtn.on('click', function(){
-					beat.player.start();
+					
+					$currBtn = $(this);
+					btnDefault();
+					_voteController.stopAllBeats();
+					
+					beat.player.startTwoBeats(function() {
+						_voteController.stopAllBeats();
+						$currBtn.text('Play');
+					});
+					$currBtn.text('Stop');
 				});
+				
 				$voteBtn.on('click', function(){
 					_voteController.vote(beat);
+					_voteController.stopAllBeats();
 				});
 				
 				$voteView.append($playBtn);
 				$voteView.append($voteBtn);
-				$voteView.append('<br>')
+				$voteView.append('<br>');
 				
 			});
 			
