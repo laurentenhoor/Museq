@@ -30,6 +30,27 @@ module.exports = function(router, passport) {
 		
 		
 	});
+	
+	router.post('/vote', function(req, res) {
+
+//		var user = authUtil.getUserFromRequest(req);
+		var beatId = req.body.beatId;
+		
+		if (beatId) {
+			
+			res.send({success: true, message: "Succesfully received your vote for: " + beatId});
+			
+			Beat.findOne({_id: beatId}, function(err, data) {
+				console.log(data);
+			});
+			
+		} else {
+			
+			res.send({success: false, message: 'No beatId received'});
+			
+		}
+		
+	});
 
 	router.post('/beat', function(req, res) {
 
