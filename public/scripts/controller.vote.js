@@ -25,6 +25,11 @@
     };
     
     
+    this.vote = function(beat) {
+    	console.log("TODO: Vote for beat with _id: "+ beat._id)
+    };
+    
+    
     this.getBeats = function() {
     	return _playableBeats;
     };

@@ -28,15 +28,19 @@
 			$.each(_voteController.getBeats(), function(beatKey, beat) {
 				
 				$playBtn = $('<button>').text('Play');
+				$voteBtn = $('<button>').text('Vote');
+				
 				$playBtn.on('click', function(){
-					console.log(beat)
 					beat.player.start();
 				});
-				$voteView.append($playBtn);
+				$voteBtn.on('click', function(){
+					_voteController.vote(beat);
+				});
 				
-				console.log(beat)
-				console.log($parent)
-				console.log($voteView)
+				$voteView.append($playBtn);
+				$voteView.append($voteBtn);
+				$voteView.append('<br>')
+				
 			});
 			
 		};
@@ -78,7 +82,6 @@
 			this.show();
 
 			return this;
-
 		};
 		
 		this.initialize();
