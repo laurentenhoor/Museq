@@ -2,8 +2,6 @@
 
 	museq.App = function(el) {
 
-//		var _room_id = 'museq_room_1';
-
 		var _instruments = {};
 		var _totalInstruments = 0;
 		var _sequencer;
