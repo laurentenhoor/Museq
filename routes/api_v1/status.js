@@ -34,7 +34,6 @@ module.exports = function(router, passport) {
 					
 					console.log('variantCount: ' + variantCount);
 					
-					
 					res.json({version: currentVersion, variantCount: variantCount});
 					
 				});
