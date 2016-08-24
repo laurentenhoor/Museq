@@ -36,13 +36,18 @@
 				$voteBtn = $('<button>').addClass('vote').text('Vote');
 				
 				$playBtn.on('click', function(){
+					if ($(this).hasClass('disabled'))
+						return;
 					
 					$currBtn = $(this);
+					$('button.play').addClass('disabled');
+						
 					btnDefault();
 					_voteController.stopAllBeats();
 					
 					beat.player.startTwoBeats(function() {
 						$currBtn.text('Play');
+						$('button.play').removeClass('disabled');
 					});
 					$currBtn.text('Stop');
 				});
