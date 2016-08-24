@@ -44,35 +44,36 @@
 			console.log('_addButtons()');
 			
 			function btnDefault() {
-				$('button.play').text('Play')
+				$('button.play').text('Play');
+				$('button.play').removeClass('playing');
 			};
-			
 			
 			$.each(_voteController.getBeats(), function(beatKey, beat) {
 				
-				$playBtn = $('<button>').addClass('play').text('Play');
-				$voteBtn = $('<button>').addClass('vote').text('Vote');
+				$playBtn = $('<button>').addClass('play').text('Play')
+				$voteBtn = $('<button>').addClass('vote').text('Vote').prop('disabled', true);
 				
 				$playBtn.on('click', function(){
-					if ($(this).hasClass('disabled'))
+					if ($('button.play').hasClass('playing'))
 						return;
 					
 					$currBtn = $(this);
-					$('button.play').addClass('disabled');
+					$currBtn.addClass('playing');
 						
-					btnDefault();
-					_voteController.stopAllBeats();
-					
 					beat.player.startTwoBeats(function() {
-						$currBtn.text('Play');
-						$('button.play').removeClass('disabled');
+						btnDefault();
+						$currBtn.addClass('played');
+						if ($('button.play').length == $('button.played').length) {
+							$('button.vote').prop('disabled', false);
+						}
 					});
 					$currBtn.text('...');
 				});
 				
 				$voteBtn.on('click', function(){
-					_voteController.vote(beat);
 					_voteController.stopAllBeats();
+					btnDefault();
+					_voteController.vote(beat);
 				});
 				
 				$voteView.append($playBtn);

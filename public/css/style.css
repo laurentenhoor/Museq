@@ -28,6 +28,9 @@ button {
   margin:10px;
   }
   
+input,button:disabled {
+	background:grey;
+}
 
 
 #start_btn {

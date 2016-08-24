@@ -29,7 +29,7 @@
     
     this.vote = function(beat) {
     	
-    	console.log("TODO: Vote for beat with _id: "+ beat._id)
+    	alert("TODO: Vote for beat with _id: "+ beat._id)
     	
     };
     
