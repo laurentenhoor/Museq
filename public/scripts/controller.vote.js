@@ -3,7 +3,6 @@
 	
   museq.Vote = function(beats_to_vote) {
 
-	
     museq.mixins.EventTarget.call(this);
 
     var _self = this;

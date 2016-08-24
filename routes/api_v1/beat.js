@@ -21,8 +21,13 @@ module.exports = function(router, passport) {
 		
 		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
 			beats.push(data);
-			res.json( beats );
+			Beat.findOne({}, {}, { sort: { 'created' : 1 } }, function(err, data) {
+				beats.push(data);
+				res.json( beats );
+			});
+			
 		});
+		
 		
 	});
 
