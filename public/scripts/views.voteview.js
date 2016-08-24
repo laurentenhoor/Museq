@@ -18,8 +18,8 @@
 		var _voteController = voteController;
 
 		var $parent = $(el);
-		$parent.append($('<div>').attr('id', 'voteView'));
-		var $voteView = $parent.find('#voteView');
+		$parent.append($('<div>').attr('id', 'vote-view'));
+		var $voteView = $parent.find('#vote-view');
 		
 	
 		/**

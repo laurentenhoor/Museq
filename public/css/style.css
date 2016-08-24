@@ -128,19 +128,19 @@ input,button:disabled {
         text-decoration: none; }
 
 #pattern-editor,
-#sequencer-view {
+#museq {
   height: 100%;
   display: block; }
   #pattern-editor table,
-  #sequencer-view table {
+  #museq table {
     width: 100%;
     height: 100%;
     border-collapse: collapse; }
   #pattern-editor thead th,
-  #sequencer-view thead th {
+  #museq thead th {
     height: 10px; }
     #pattern-editor thead th#playhead,
-    #sequencer-view thead th#playhead {
+    #museq thead th#playhead {
       position: relative;
       left: 0%;
       top: 0;
@@ -149,7 +149,7 @@ input,button:disabled {
       -webkit-animation-duration: 2s;
       background-color: #C8DEC0; }
   #pattern-editor td,
-  #sequencer-view td {
+  #museq td {
     border: 1px solid #333333;
     background: #000;
     /* mark 1st beat in bars
@@ -160,9 +160,9 @@ input,button:disabled {
       border-right: 1px solid #f9f9f9;
     }*/ }
     #pattern-editor td:nth-child(1), #pattern-editor td:active, #pattern-editor td.active,
-    #sequencer-view td:nth-child(1),
-    #sequencer-view td:active,
-    #sequencer-view td.active {
+    #museq td:nth-child(1),
+    #museq td:active,
+    #museq td.active {
       background: transparent;
       position: relative;
       /* gloss
@@ -175,10 +175,10 @@ input,button:disabled {
         top: 0;
       }*/ }
     #pattern-editor td:nth-child(1),
-    #sequencer-view td:nth-child(1) {
+    #museq td:nth-child(1) {
       width: 60px; }
       #pattern-editor td:nth-child(1) h1,
-      #sequencer-view td:nth-child(1) h1 {
+      #museq td:nth-child(1) h1 {
         font-size: 10px;
         font-weight: bold;
         text-transform: uppercase;
@@ -192,9 +192,9 @@ input,button:disabled {
         text-align: center; }
       @media (min-width: 580px) {
         #pattern-editor td:nth-child(1),
-        #sequencer-view td:nth-child(1) {
+        #museq td:nth-child(1) {
           width: 100px; }
           #pattern-editor td:nth-child(1) h1,
-          #sequencer-view td:nth-child(1) h1 {
+          #museq td:nth-child(1) h1 {
             font-size: 16px;
             width: 100px; } }

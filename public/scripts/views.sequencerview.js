@@ -7,7 +7,7 @@
    * @class SequencerView
    * @param {Object} id The id of this specific connection.
    */
-  museq.views.SequencerView = function(el) {
+  museq.views.SequencerView = function($el) {
 
     /**
      * Mixins
@@ -23,7 +23,7 @@
     var _instrumentCount = -1;
     var _instrumentMax = 4;
     
-    var $el = $(el);
+//    var $el = $(el);
     var $table = $el.find('table');
 
     var $playhead = undefined;
@@ -186,10 +186,16 @@
      * @return {museq.views.SequencerView} A reference to this instance.
      */
     this.show = function() {
-      $el.show();
+      $table.show();
       
       return this;
     };
+    
+    this.hide = function() {
+    	$table.hide();
+    	
+    	return this;
+    }
 
     this.removeInstrument = function(instrument) {
       $table.find('tr[data-instrument-id="' + instrument.id + '"]').remove();
