@@ -1,7 +1,8 @@
 module.exports = function(router, passport) {
 	
 	var authUtil = require('./authUtil');
-	var Beat = require('../../models/beat')
+	var Beat = require('../../models/beat');
+	var Settings = require('../../models/settings');
 	
 	router.get('/beat/auth', passport.authenticate('jwt', { session: false}), function(req, res) {
 		res.send('Successful authorization of: '+ authUtil.getUserFromRequest(req));
@@ -27,22 +28,23 @@ module.exports = function(router, passport) {
 			});
 			
 		});
-		
-		
 	});
 	
 	router.post('/vote', function(req, res) {
 
-//		var user = authUtil.getUserFromRequest(req);
+		var user = authUtil.getUserFromRequest(req);
+		
 		var beatId = req.body.beatId;
 		
 		if (beatId) {
 			
-			res.send({success: true, message: "Succesfully received your vote for: " + beatId});
-			
-			Beat.findOne({_id: beatId}, function(err, data) {
-				console.log(data);
-			});
+			 Beat.findOne({_id: beatId}, function(err, beat) {
+				 if (beat.vote(user)) {
+					res.json({success: true, message: "Successfully voted!"})
+				 } else {
+					res.json({success: false, message: "Unable to vote!"})
+				 };
+			 });
 			
 		} else {
 			
@@ -68,6 +70,15 @@ module.exports = function(router, passport) {
 			}
 			res.json({success: true, msg: 'Successful saved beat.'});
 		});
+		
+	});	
+
+	router.get('/status', function(req, res) {
+		
+		// TODO
+		// case 1: waiting for # more votes until next generation, you have voted for this, 
+		//		   create a mutation in advance, or play around in sandbox mode
+		// case 2: not enough mutations in generation #, please create one here!
 		
 	});
 			

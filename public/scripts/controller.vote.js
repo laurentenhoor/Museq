@@ -37,8 +37,8 @@
 				method: "POST",
 				data : JSON.stringify(data),
 				context: document.body
-			}).done(function(data) {
-				console.log(data);
+			}).done(function(status) {
+				console.log(status);
 			});
 
 

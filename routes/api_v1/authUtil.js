@@ -20,6 +20,6 @@ module.exports.getUserFromRequest = function(req) {
 		var decoded = jwt.decode(token, config.secret);
 		return decoded.name
 	} else {
-		return null;
+		return 'anonymous';
 	}
 }
