@@ -42,7 +42,6 @@
 					_voteController.stopAllBeats();
 					
 					beat.player.startTwoBeats(function() {
-						_voteController.stopAllBeats();
 						$currBtn.text('Play');
 					});
 					$currBtn.text('Stop');

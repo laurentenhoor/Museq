@@ -25,7 +25,9 @@
     var _lastDrawTime = -1;
 
     var _self = this;
-    
+
+    var _stopCallback = null;
+    var _twoBeatsIndex = 0;
 
     var samplesPath = '';
 
@@ -90,18 +92,25 @@
     	_started = false;
     	_noteIndex = 0;
     };
-    
-
-    _stopCallback = null;
-    _twoBeatsIndex = 0;
+ 
     
     this.startTwoBeats = function(stopCallback) {
-    	
     	this.start();
     	_stopCallback = stopCallback;
-    	
-    	
     };
+    
+    function increaseTwoBeatsIndex() {
+    	_twoBeatsIndex++;
+        if (_twoBeatsIndex > 1) {
+        	_twoBeatsIndex = 0;
+        	if (_stopCallback) {
+        		_stopCallback()
+        		_self.stop();
+            	_stopCallback = null;
+        	}
+        }
+        
+    }
 
 
     this.start = function() {
@@ -215,13 +224,8 @@
 
         if (_noteIndex == _loopLength) {
             _noteIndex = 0;
-            _twoBeatsIndex++;
-            if (_twoBeatsIndex > 1) {
-            	_stopCallback();
-//            	_stopCallback = null;
-            	_twoBeatsIndex = 0;
-            	
-            }
+            increaseTwoBeatsIndex();
+            
             // pattern++;
         }
     };
