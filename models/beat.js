@@ -8,7 +8,8 @@ var BeatSchema = new Schema({
 	},
 	created: {
 		type: Date,
-		required: true
+		required: true,
+		default: Date.now
 	},
 	version : {
 		type: Number,

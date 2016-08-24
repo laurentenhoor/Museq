@@ -2,7 +2,6 @@ module.exports = function(router, passport) {
 	
 	var authUtil = require('./authUtil');
 	var Beat = require('../../models/beat');
-	var Settings = require('../../models/settings');
 	
 	router.get('/beat/auth', passport.authenticate('jwt', { session: false}), function(req, res) {
 		res.send('Successful authorization of: '+ authUtil.getUserFromRequest(req));
@@ -73,13 +72,5 @@ module.exports = function(router, passport) {
 		
 	});	
 
-	router.get('/status', function(req, res) {
-		
-		// TODO
-		// case 1: waiting for # more votes until next generation, you have voted for this, 
-		//		   create a mutation in advance, or play around in sandbox mode
-		// case 2: not enough mutations in generation #, please create one here!
-		
-	});
 			
-}
+};
