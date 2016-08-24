@@ -22,18 +22,19 @@ module.exports = function(router, passport) {
 				getVariantCount(status);
 			}
 			
-			
 			function getVariantCount(status) {
 				
 				var currentVersion = status.version;
 				
 				console.log('currVersion: ' + currentVersion);
 				
-				Beat.count({version: currentVersion}, function(count) {
+				Beat.find({version: currentVersion}, function(err, beats) {
 					
-					console.log('variantCount: ' + count)
-
-					res.json(count);
+					var variantCount = beats.length;
+					
+					console.log('variantCount: ' + variantCount);
+					
+					res.json({version: currentVersion, variantCount: variantCount});
 					
 				});
 				
