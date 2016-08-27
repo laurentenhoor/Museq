@@ -23,6 +23,8 @@
 		var _loopLength = 16;
 		var _started = false;
 		var _lastDrawTime = -1;
+		
+		var _initialBeat = null;
 
 		var _self = this;
 		var _clients = {};
@@ -607,6 +609,23 @@
 			// _instruments[instrumentId].tracks[trackId].notes[data.noteId] = data.volume;
 
 //			this.saveBeat(_instruments);
+			
+			
+			// Check for changes
+			var amountOfChanges = 0;
+			
+			$.each(_instruments, function(instrument_key, instrument) {
+				$.each(instrument.tracks, function(track_key, track) {
+					$.each(track.notes, function(note_key, note) {
+						if (!note == _initialBeat.instruments[instrument_key].tracks[track_key].notes[note_key]) {
+							amountOfChanges++;
+						} 
+					});				
+				});
+			});
+			
+			alert("We detected "+amountOfChanges + " changes!");
+			
 
 
 		};
@@ -639,6 +658,8 @@
 				method: "GET",
 				context: document.body
 			}).done(function(beat) {
+				
+				_initialBeat = JSON.parse(JSON.stringify(beat));
 
 				var instruments = beat.instruments;
 				console.log(instruments);
