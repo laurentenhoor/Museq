@@ -78,6 +78,7 @@
 			_sequencer.loadBeat();
 			
 			_sequencerView.show();
+//			_sequencer.start();
 
 
 		};

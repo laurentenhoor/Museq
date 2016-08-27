@@ -1,135 +1,135 @@
 (function() {
 
-  museq.Sequencer = function(conn) {
+	museq.Sequencer = function(conn) {
 
-    /**
-     * Mixins
-     */
-    museq.mixins.EventTarget.call(this);
+		/**
+		 * Mixins
+		 */
+		museq.mixins.EventTarget.call(this);
 
-    var _clients = {};
-    var _instruments = [];
-    var _availableInstruments = [];
-    var _tracks = {};
-    var _context = null;
-    var _masterGainNode = null;
+		var _clients = {};
+		var _instruments = [];
+		var _availableInstruments = [];
+		var _tracks = {};
+		var _context = null;
+		var _masterGainNode = null;
 
-    var _currentTime = 0;
-    var _noteTime = 1;
-    var _noteIndex = 0;
-    var _startTime = 0;
-    var _startTimeDraw = 0;
-    var _tempo = 120;
-    var _loopLength = 16;
-    var _started = false;
-    var _lastDrawTime = -1;
+		var _currentTime = 0;
+		var _noteTime = 1;
+		var _noteIndex = 0;
+		var _startTime = 0;
+		var _startTimeDraw = 0;
+		var _tempo = 120;
+		var _loopLength = 16;
+		var _started = false;
+		var _lastDrawTime = -1;
 
-    var _self = this;
-    var _clients = {};
+		var _self = this;
+		var _clients = {};
 
-    var samplesPath = 'audio/';
+		var samplesPath = 'audio/';
 
-    var instrumentsConfig = [
-        {
-            type: 'samples',
-            color: 'hotpink',
-            name: 'Drum kit',
-            tracks: [
-                {
-                    name: 'Kick',
-                    sampleUrl: '12-TR-909/909 KIK2.wav'
-                }, {
-                    name: 'Snare',
-                    sampleUrl: '12-TR-909/909 SD1.wav'
-                },  {
-                    name: 'Snare long',
-                    sampleUrl: '12-TR-909/909 SD3.wav'
-                }, {
-                    name: 'HiHat',
-                    sampleUrl: '12-TR-909/909 HHCL 1.wav'
-                }, {
-                    name: 'HiHat open',
-                    sampleUrl: '12-TR-909/909 HHOP.wav'
-                },
-            ]
-        },
-        {
-            type: 'samples',
-            color: '#51ACBD',
-            name: 'Bass DRY synth',
-            tracks: [
-                {
-                    name: 'C#',
-                    sampleUrl: 'bassdry/Bass3_8.mp3'
-                },
-                {
-                    name: 'B',
-                    sampleUrl: 'bassdry/Bass3_7.mp3'
-                },
-                {
-                    name: 'A',
-                    sampleUrl: 'bassdry/Bass3_6.mp3'
-                },
-                {
-                    name: 'F#',
-                    sampleUrl: 'bassdry/Bass3_5.mp3'
-                },
-                {
-                    name: 'E',
-                    sampleUrl: 'bassdry/Bass3_4.mp3'
-                },
-                {
-                    name: 'C#',
-                    sampleUrl: 'bassdry/Bass3_3.mp3'
-                }, {
-                    name: 'B',
-                    sampleUrl: 'bassdry/Bass3_2.mp3'
-                },
-                {
-                    name: 'A',
-                    sampleUrl: 'bassdry/Bass3_1.mp3'
-                }
-            ]
-        },
-        {
-            type: 'samples',
-            color: '#AADB53',
-            name: 'Lead synth',
-            tracks: [
-                {
-                    name: 'A',
-                    sampleUrl: 'lead1/Synth1_8.mp3'
-                }, {
-                    name: 'B',
-                    sampleUrl: 'lead1/Synth1_7.mp3'
-                },
-                {
-                    name: 'C#',
-                    sampleUrl: 'lead1/Synth1_6.mp3'
-                },
-                {
-                    name: 'E',
-                    sampleUrl: 'lead1/Synth1_5.mp3'
-                },
-                {
-                    name: 'F#',
-                    sampleUrl: 'lead1/Synth1_4.mp3'
-                },
-                {
-                    name: 'A',
-                    sampleUrl: 'lead1/Synth1_3.mp3'
-                },
-                {
-                    name: 'B',
-                    sampleUrl: 'lead1/Synth1_2.mp3'
-                },
-                {
-                    name: 'C#',
-                    sampleUrl: 'lead1/Synth1_1.mp3'
-                }
-            ]
-        },
-        /*
+		var instrumentsConfig = [
+		                         {
+		                        	 type: 'samples',
+		                        	 color: 'hotpink',
+		                        	 name: 'Drum kit',
+		                        	 tracks: [
+		                        	          {
+		                        	        	  name: 'Kick',
+		                        	        	  sampleUrl: '12-TR-909/909 KIK2.wav'
+		                        	          }, {
+		                        	        	  name: 'Snare',
+		                        	        	  sampleUrl: '12-TR-909/909 SD1.wav'
+		                        	          },  {
+		                        	        	  name: 'Snare long',
+		                        	        	  sampleUrl: '12-TR-909/909 SD3.wav'
+		                        	          }, {
+		                        	        	  name: 'HiHat',
+		                        	        	  sampleUrl: '12-TR-909/909 HHCL 1.wav'
+		                        	          }, {
+		                        	        	  name: 'HiHat open',
+		                        	        	  sampleUrl: '12-TR-909/909 HHOP.wav'
+		                        	          },
+		                        	          ]
+		                         },
+		                         {
+		                        	 type: 'samples',
+		                        	 color: '#51ACBD',
+		                        	 name: 'Bass DRY synth',
+		                        	 tracks: [
+		                        	          {
+		                        	        	  name: 'C#',
+		                        	        	  sampleUrl: 'bassdry/Bass3_8.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'B',
+		                        	        	  sampleUrl: 'bassdry/Bass3_7.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'A',
+		                        	        	  sampleUrl: 'bassdry/Bass3_6.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'F#',
+		                        	        	  sampleUrl: 'bassdry/Bass3_5.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'E',
+		                        	        	  sampleUrl: 'bassdry/Bass3_4.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'C#',
+		                        	        	  sampleUrl: 'bassdry/Bass3_3.mp3'
+		                        	          }, {
+		                        	        	  name: 'B',
+		                        	        	  sampleUrl: 'bassdry/Bass3_2.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'A',
+		                        	        	  sampleUrl: 'bassdry/Bass3_1.mp3'
+		                        	          }
+		                        	          ]
+		                         },
+		                         {
+		                        	 type: 'samples',
+		                        	 color: '#AADB53',
+		                        	 name: 'Lead synth',
+		                        	 tracks: [
+		                        	          {
+		                        	        	  name: 'A',
+		                        	        	  sampleUrl: 'lead1/Synth1_8.mp3'
+		                        	          }, {
+		                        	        	  name: 'B',
+		                        	        	  sampleUrl: 'lead1/Synth1_7.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'C#',
+		                        	        	  sampleUrl: 'lead1/Synth1_6.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'E',
+		                        	        	  sampleUrl: 'lead1/Synth1_5.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'F#',
+		                        	        	  sampleUrl: 'lead1/Synth1_4.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'A',
+		                        	        	  sampleUrl: 'lead1/Synth1_3.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'B',
+		                        	        	  sampleUrl: 'lead1/Synth1_2.mp3'
+		                        	          },
+		                        	          {
+		                        	        	  name: 'C#',
+		                        	        	  sampleUrl: 'lead1/Synth1_1.mp3'
+		                        	          }
+		                        	          ]
+		                         },
+		                         /*
         {
             type: 'samples',
             color: '#517CBD',
@@ -170,512 +170,517 @@
 
             ]
         },
-        */
-//        {
-//            type: 'samples',
-//            color: '#BD5181',
-//            name: 'Voice',
-//            tracks: [
-//                {
-//                    name: 'Music',
-//                    sampleUrl: 'voice/Voice1_1.mp3'
-//                }, {
-//                    name: 'Hack',
-//                    sampleUrl: 'voice/Voice1_2.mp3'
-//                }, {
-//                    name: 'Day',
-//                    sampleUrl: 'voice/Voice1_3.mp3'
-//                }, {
-//                    name: 'At',
-//                    sampleUrl: 'voice/Voice1_4.mp3'
-//                }, {
-//                    name: 'Spotify',
-//                    sampleUrl: 'voice/Voice1_5.mp3'
-//                }
-//            ]
-//        },
-        // ,{
-        //     type: 'synth',
-        //     color: '#c0ffee',
-        //     name: 'Nordic Lead',
-        //     tracks: [
-        //         {
-        //          name: 'A2',
-        //          note: 0
-        //         }, {
-        //          name: 'C2',
-        //          note: 3
-        //         }, {
-        //          name: 'D2',
-        //          note: 5
-        //         }, {
-        //          name: 'E2',
-        //          note: 7
-        //         }, {
-        //          name: 'G2',
-        //          note: 10
-        //         }, {
-        //          name: 'A3',
-        //          note: 12
-        //         }, {
-        //          name: 'C3',
-        //          note: 15
-        //         }, {
-        //          name: 'D3',
-        //          note: 17
-        //         }, {
-        //          name: 'E3',
-        //          note: 19
-        //         }, {
-        //          name: 'G3',
-        //          note: 21
-        //         }
-        //     ]
-        // },
-        {
-            type: 'samples',
-            color: '#deadf0',
-            name: 'Percussion',
-            tracks: [
-                {
-                    name: 'Clap',
-                    sampleUrl: '12-TR-909/909 CLAP.wav'
-                }, {
-                    name: 'Rim',
-                    sampleUrl: '12-TR-909/909 RIM.wav'
-                }, {
-                    name: 'Tom 1',
-                    sampleUrl: '12-TR-909/909 HI.TOM1.wav'
-                }, {
-                    name: 'Tom 2',
-                    sampleUrl: '12-TR-909/909 HI.TOM2.wav'
-                }
-            ]
-        }
-    ];
-
-
-    var _lowpassFilter = null;
-    var _compressor = null;
-    var _masterDry = null;
-    var _masterWet = null;
-    var _masterDelaySend = null;
-    var _delay = null;
-    var _reverb = null;
-    var _highpassFilter = null;
-
-    var _highpassFilterFreq = 0;
-    this._filterFreq = 22000;
-    this._playbackRate = 1;
-    this._q = 1;
-    this._empty = null;
-    var _filterCutoff = 22000;
-
-    var _delayAmount = 0.125;
-    this._delayTime = 0;
-
-    var effectsConfig = [
-        {
-            id: 0,
-            name: 'Playback',
-            x: {
-                name: 'Freq',
-                param: '_filterFreq',
-                min: 200,
-                max: 22000
-            },
-            y: {
-                name: 'Q',
-                param: '_q',
-                min: 0,
-                max: 5
-            }
-        }, {
-            id: 1,
-            name: 'Playback',
-            x: {
-                name: 'Freq',
-                param: '_playbackRate',
-                min: 0.5,
-                max: 2
-            },
-            y: {
-                name: '',
-                param: '_empty',
-                min: 0,
-                max: 1
-            }
-        }
-    ];
-
-    // FX
-
-    this.initialize = function() {
-
-        // Create context.
-    	try {
-    		window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    		_context = new window.AudioContext();
-    	} catch (e) {
-    	    alert("No Web Audio API support");
-    	}
-		
-        // Create master gain control.
-        _masterGainNode = _context.createGain();
-        _masterGainNode.gain.value = 0.7;
-
-        //create lowpass filter
-        _lowpassFilter = _context.createBiquadFilter();
-        _lowpassFilter.frequency.value = 300;
-        _lowpassFilter.Q.value = 300;
-        // _masterGainNode.connect(_lowpassFilter);
-
-        //create lowpass filter
-        // _highpassFilter = _context.createBiquadFilter();
-        // _highpassFilter.type = 1;
-        // _highpassFilter.frequency.value = _highpassFilterFreq;
-
-        //create compressor
-         _compressor = _context.createDynamicsCompressor();
-         _compressor.treshold = -20;
-         _compressor.attack = 1;
-         _compressor.release = 250;
-         _compressor.ratio = 4;
-         _compressor.knee = 5;
-
-
-        // Create master gain control.
-        _compressor.connect(_context.destination);
-        _lowpassFilter.connect(_compressor);
-
-        _masterGainNode.connect(_lowpassFilter);
-        // Create master wet and dry.
-        // _masterDry = _context.createGain();
-        // _masterWet = _context.createGain();
-        // _masterDelaySend = _context.createGain();
-        // _masterDry.gain.value = 1;
-        // _masterWet.gain.value = 0;
-
-        // Create delay
-        // _delay = _context.createDelay();
-
-        // Create reverb
-        // _reverb = _context.createConvolver();
-
-        // _compressor.connect(_context.destination);
-        // Connect master dry and wet to compressor.
-        // _masterDry.connect(_compressor);
-        // _masterWet.connect(_compressor);
-        // _masterDelaySend.connect(_compressor);
-
-        // Connect delay to master wet.
-        // _delay.connect(_masterDelaySend);
-        // _reverb.connect(_masterWet);
-
-        //connect lowpass filter
-        // _lowpassFilter.connect(_masterDry);
-        // _lowpassFilter.connect(_masterWet);
-        // _lowpassFilter.connect(_masterDelaySend);
-
-        // _highpassFilter.connect(_lowpassFilter);
-        // _masterGainNode.connect(_highpassFilter);
-
-
-
-        this.setFxValues();
-
-        this.createInstruments();
-    };
-
-    this.setFxValues = function() {
-
-        // _delay.delayTime.value = _delayTime;
-        // _masterDelaySend.gain.value = _delayAmount;
-        _lowpassFilter.frequency.value = this._filterFreq;
-        _lowpassFilter.Q.value = this._q;
-        // console.log('_filterFreq', this._filterFreq, _lowpassFilter.frequency.value);
-    }
-
-    this.createInstruments = function() {
-        _instruments = [];
-        for (var i = 0; i < instrumentsConfig.length; i++) {
-            var tracks = this.createTracks(i, instrumentsConfig[i].tracks, instrumentsConfig[i].type);
-            var instrument = new museq.models.Instrument(i, instrumentsConfig[i].name, tracks, 1.0, instrumentsConfig[i].type, instrumentsConfig[i].color);
-            _instruments.push(instrument);
-        };
-
-        _availableInstruments = _instruments.concat();
-    };
-
-    this.createTracks = function(instrumentId, tracksConfig, type) {
-        console.log('createTracks');
-        var tracks = [];
-        for (var i = 0; i < tracksConfig.length; i++) {
-            var config = tracksConfig[i];
-
-            if (type === 'samples') {
-                var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, samplesPath + config.sampleUrl, 1.0);
-            } else {
-                var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, null, 1.0);
-                track.note = config.note;
-                console.log('track', track);
-            };
-            tracks.push(track);
-        }
-
-        return tracks;
-    };
-
-    this.addInstrument = function(instrument) {
-        // Reset the notes of all the tracks
-        for (var n = 0, len = instrument.tracks.length; n < len; n += 1) {
-            var track = instrument.tracks[n];
-            instrument.tracks[n].resetNotes()
-        }
-        _availableInstruments.push(instrument);
-    };
-
-    this.getNextInstrument = function(clientId) {
-        if (typeof _clients[clientId] !== 'undefined') {
-            return _clients[clientId];
-        }
-
-        var numAvailableInstruments = _availableInstruments.length;
-        if (numAvailableInstruments === 0) {
-            console.log("No more instruments available");
-            return;
-        }
-
-        var nextInstrument = _availableInstruments[0];
-        _availableInstruments.shift();
-
-        // Initialize the instrument and call start when ready.
-        nextInstrument.initialize(this.start);
-        // Pass the context the instrument.
-        nextInstrument.setup(_context);
-
-        console.log("Released random instrument", nextInstrument);
-
-        _clients[clientId] = nextInstrument;
-        return nextInstrument;
-    };
-
-    this.getRandomInstrument = function(clientId) {
-        if (typeof _clients[clientId] !== 'undefined') {
-            return _clients[clientId];
-        }
-
-        var numAvailableInstruments = _availableInstruments.length;
-        if (numAvailableInstruments === 0) {
-            console.log("No instruments available");
-            return;
-        }
-
-        var randomIndex = Math.floor(Math.random() * numAvailableInstruments);
-        var randomInstrument = _availableInstruments[randomIndex];
-        _availableInstruments.splice(randomIndex, 1);
-
-        // Initialize the instrument and call start when ready.
-        randomInstrument.initialize(this.start);
-        // Pass the context the instrument.
-        randomInstrument.setup(_context);
-
-        console.log("Released random instrument", randomInstrument);
-
-        _clients[clientId] = randomInstrument;
-        return randomInstrument;
-    };
-
-    this.start = function() {
-        
-        if (_started) return;
-        console.log('Started!', this);
-        
-        _started = true;
-        _noteTime = 0.0;
-        // _startTime = _context.currentTime + 0.160;	
-        _startTime = _context.currentTime + 0.005;
-        _startTimeDraw = Date.now()/1000 + 0.005;
-        _self.schedule();
-        
-    };
-
-    this.schedule = function() {
-        var currentTime = _context.currentTime;
-        
-        var currentTimeDraw = Date.now()/1000;
-
-        // The sequence starts at startTime, so normalize currentTime so that it's 0 at the start of the sequence.
-        currentTime -= _startTime;
-        currentTimeDraw -= _startTimeDraw;
-
-        while (_noteTime < (currentTime + 0.200)) {
-        	
-//        	alert('currentTime: ' + currentTime + "; noteTime: "+ _noteTime +"; startTime: "  + _startTime)	
-        	
-            // Convert noteTime to context time.
-            var contextPlayTime = _noteTime + _startTime;
-
-            for (var i = 0; i < _instruments.length; i++) {
-                for (var j = 0; j < _instruments[i].tracks.length; j++) {
-                    var track = _instruments[i].tracks[j];
-                    var volume = track.notes[_noteIndex];
-                    if (_instruments[i].type === 'samples' && _instruments[i].isLoaded()) {
-                        if (volume > 0) {
-                            _self.playNote(track, contextPlayTime, volume);
-                        }
-                    } else if (_instruments[i].type === 'synth') {
-
-                        if (volume > 0) {
-                            _instruments[i].play(track.note);
-                        } else {
-                            _instruments[i].stop();
-                        }
-                    }
-                }
-            }
-
-            // Attempt to synchronize drawing time with sound
-            if (_noteTime != _lastDrawTime) {
-                _lastDrawTime = _noteTime;
-//                setInterval(function(){
-//                	_self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
-//                }, 5);
-                _self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
-                
-            }
-            _self.step();
-            
-        }
-        
-        requestAnimationFrame(_self.schedule);
-        
-    };
-
-    this.playNote = function(track, noteTime, volume) {
-        // Create the note
-        var voice = _context.createBufferSource();
-        voice.buffer = track.getBuffer();
-        
-//        alert(voice.buffer.length)
-        
-//        alert(voice.buffer);
-
-//        // Create a gain node.
-        var gainNode = _context.createGain();
-//        // Connect the source to the gain node.
-        voice.connect(gainNode);
-
-        voice.playbackRate.value = this._playbackRate;
-
-        // Connect the gain node to the destination.
-//        gainNode.connect(_masterGainNode);
-        
-
-        // Reduce the volume.
-//        gainNode.gain.value = volume;
-        gainNode.connect(_context.destination);
-
-        voice.connect(_context.destination);
-        
-        if (!voice.start) {
-        	voice.start = voice.noteOn;
-        }
-        voice.start(noteTime);
-    };
-
-    this.step = function() {
-        // Advance time by a 16th note...
-        var secondsPerBeat = 60.0 / _tempo;
-        _noteTime = _noteTime + 0.25 * secondsPerBeat;
-        _noteIndex++;
-
-        if (_noteIndex == _loopLength) {
-            _noteIndex = 0;
-            // pattern++;
-        }
-    };
-
-    this.updateNote = function(data) {
-    	
-        console.log('update note', data);
-      
-        var trackId = data.trackId.split('-')[1];
-        var instrumentId = data.trackId.split('-')[0];
-        // TODO check the values MTF
-        
-        _instruments[instrumentId].tracks[trackId].notes[data.note] = data.volume;
-        // _instruments[instrumentId].tracks[trackId].notes[data.noteId] = data.volume;
-        
-        $.ajax({
-    	  url: "./api/v1/beat/",
-    	  contentType:"application/json; charset=utf-8",
-    	  method: "POST",
-    	  data : JSON.stringify(_instruments),
-    	  context: document.body
-    	}).done(function(data) {
-    	  console.log(data);
-    	});
-        
-    };
-    
-    this.playBeat = function() {
-    	
-    	
-    	
-    };
-    
-    
-    this.loadBeat = function() {
-    	
-        $.ajax({
-      	  url: "./api/v1/latest_winner/",
-      	  contentType:"application/json; charset=utf-8",
-      	  method: "GET",
-      	  context: document.body
-      	}).done(function(beat) {
-      		
-      		var instruments = beat.instruments;
-      		console.log(instruments);
-      		
-      		$.each(instruments, function(instrument_key, instrument) {
-      			$.each(instrument.tracks, function(track_key, track) {
-      				_instruments[instrument_key].tracks[track_key].notes = track.notes;
-      			})
-      		});
-      		
-      		_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
-      	  
-      	});
-    	
-    	
-    };
-    
-
-    this.updateFxParam = function(data) {
-        console.log('update fx param', data);
-
-        var fxConfig = effectsConfig[data.id];
-        paramX = fxConfig.x.param;
-        paramY = fxConfig.y.param;
-        valueX = this.interpolate(data.x, fxConfig.x.min, fxConfig.x.max);
-        valueY = this.interpolate(data.y, fxConfig.y.min, fxConfig.y.max);
-        this[paramX] = valueX;
-        this[paramY] = valueY;
-
-        console.log('update', paramX, ':', valueX);
-        console.log('update', paramY, ':', valueY);
-
-        this.setFxValues();
-    };
-
-    this.interpolate = function(value, minimum, maximum) {
-        return minimum + (maximum - minimum) * value;
-    }
-
-    this.initialize();
-    
-  };
+		                          */
+//		                         {
+//		                         type: 'samples',
+//		                         color: '#BD5181',
+//		                         name: 'Voice',
+//		                         tracks: [
+//		                         {
+//		                         name: 'Music',
+//		                         sampleUrl: 'voice/Voice1_1.mp3'
+//		                         }, {
+//		                         name: 'Hack',
+//		                         sampleUrl: 'voice/Voice1_2.mp3'
+//		                         }, {
+//		                         name: 'Day',
+//		                         sampleUrl: 'voice/Voice1_3.mp3'
+//		                         }, {
+//		                         name: 'At',
+//		                         sampleUrl: 'voice/Voice1_4.mp3'
+//		                         }, {
+//		                         name: 'Spotify',
+//		                         sampleUrl: 'voice/Voice1_5.mp3'
+//		                         }
+//		                         ]
+//		                         },
+		                         // ,{
+		                         //     type: 'synth',
+		                         //     color: '#c0ffee',
+		                         //     name: 'Nordic Lead',
+		                         //     tracks: [
+		                         //         {
+		                         //          name: 'A2',
+		                         //          note: 0
+		                         //         }, {
+		                         //          name: 'C2',
+		                         //          note: 3
+		                         //         }, {
+		                         //          name: 'D2',
+		                         //          note: 5
+		                         //         }, {
+		                         //          name: 'E2',
+		                         //          note: 7
+		                         //         }, {
+		                         //          name: 'G2',
+		                         //          note: 10
+		                         //         }, {
+		                         //          name: 'A3',
+		                         //          note: 12
+		                         //         }, {
+		                         //          name: 'C3',
+		                         //          note: 15
+		                         //         }, {
+		                         //          name: 'D3',
+		                         //          note: 17
+		                         //         }, {
+		                         //          name: 'E3',
+		                         //          note: 19
+		                         //         }, {
+		                         //          name: 'G3',
+		                         //          note: 21
+		                         //         }
+		                         //     ]
+		                         // },
+		                         {
+		                        	 type: 'samples',
+		                        	 color: '#deadf0',
+		                        	 name: 'Percussion',
+		                        	 tracks: [
+		                        	          {
+		                        	        	  name: 'Clap',
+		                        	        	  sampleUrl: '12-TR-909/909 CLAP.wav'
+		                        	          }, {
+		                        	        	  name: 'Rim',
+		                        	        	  sampleUrl: '12-TR-909/909 RIM.wav'
+		                        	          }, {
+		                        	        	  name: 'Tom 1',
+		                        	        	  sampleUrl: '12-TR-909/909 HI.TOM1.wav'
+		                        	          }, {
+		                        	        	  name: 'Tom 2',
+		                        	        	  sampleUrl: '12-TR-909/909 HI.TOM2.wav'
+		                        	          }
+		                        	          ]
+		                         }
+		                         ];
+
+		var _lowpassFilter = null;
+		var _compressor = null;
+		var _masterDry = null;
+		var _masterWet = null;
+		var _masterDelaySend = null;
+		var _delay = null;
+		var _reverb = null;
+		var _highpassFilter = null;
+
+		var _highpassFilterFreq = 0;
+		this._filterFreq = 22000;
+		this._playbackRate = 1;
+		this._q = 1;
+		this._empty = null;
+		var _filterCutoff = 22000;
+
+		var _delayAmount = 0.125;
+		this._delayTime = 0;
+
+		var effectsConfig = [
+		                     {
+		                    	 id: 0,
+		                    	 name: 'Playback',
+		                    	 x: {
+		                    		 name: 'Freq',
+		                    		 param: '_filterFreq',
+		                    		 min: 200,
+		                    		 max: 22000
+		                    	 },
+		                    	 y: {
+		                    		 name: 'Q',
+		                    		 param: '_q',
+		                    		 min: 0,
+		                    		 max: 5
+		                    	 }
+		                     }, {
+		                    	 id: 1,
+		                    	 name: 'Playback',
+		                    	 x: {
+		                    		 name: 'Freq',
+		                    		 param: '_playbackRate',
+		                    		 min: 0.5,
+		                    		 max: 2
+		                    	 },
+		                    	 y: {
+		                    		 name: '',
+		                    		 param: '_empty',
+		                    		 min: 0,
+		                    		 max: 1
+		                    	 }
+		                     }
+		                     ];
+
+		// FX
+
+		this.initialize = function() {
+
+			// Create context.
+			try {
+				window.AudioContext = window.AudioContext || window.webkitAudioContext;
+				_context = new window.AudioContext();
+			} catch (e) {
+				alert("No Web Audio API support");
+			}
+
+			// Create master gain control.
+			_masterGainNode = _context.createGain();
+			_masterGainNode.gain.value = 0.7;
+
+			//create lowpass filter
+			_lowpassFilter = _context.createBiquadFilter();
+			_lowpassFilter.frequency.value = 300;
+			_lowpassFilter.Q.value = 300;
+			// _masterGainNode.connect(_lowpassFilter);
+
+			//create lowpass filter
+			// _highpassFilter = _context.createBiquadFilter();
+			// _highpassFilter.type = 1;
+			// _highpassFilter.frequency.value = _highpassFilterFreq;
+
+			//create compressor
+			_compressor = _context.createDynamicsCompressor();
+			_compressor.treshold = -20;
+			_compressor.attack = 1;
+			_compressor.release = 250;
+			_compressor.ratio = 4;
+			_compressor.knee = 5;
+
+
+			// Create master gain control.
+			_compressor.connect(_context.destination);
+			_lowpassFilter.connect(_compressor);
+
+			_masterGainNode.connect(_lowpassFilter);
+			// Create master wet and dry.
+			// _masterDry = _context.createGain();
+			// _masterWet = _context.createGain();
+			// _masterDelaySend = _context.createGain();
+			// _masterDry.gain.value = 1;
+			// _masterWet.gain.value = 0;
+
+			// Create delay
+			// _delay = _context.createDelay();
+
+			// Create reverb
+			// _reverb = _context.createConvolver();
+
+			// _compressor.connect(_context.destination);
+			// Connect master dry and wet to compressor.
+			// _masterDry.connect(_compressor);
+			// _masterWet.connect(_compressor);
+			// _masterDelaySend.connect(_compressor);
+
+			// Connect delay to master wet.
+			// _delay.connect(_masterDelaySend);
+			// _reverb.connect(_masterWet);
+
+			//connect lowpass filter
+			// _lowpassFilter.connect(_masterDry);
+			// _lowpassFilter.connect(_masterWet);
+			// _lowpassFilter.connect(_masterDelaySend);
+
+			// _highpassFilter.connect(_lowpassFilter);
+			// _masterGainNode.connect(_highpassFilter);
+
+
+
+			this.setFxValues();
+
+			this.createInstruments();
+		};
+
+		this.setFxValues = function() {
+
+			// _delay.delayTime.value = _delayTime;
+			// _masterDelaySend.gain.value = _delayAmount;
+			_lowpassFilter.frequency.value = this._filterFreq;
+			_lowpassFilter.Q.value = this._q;
+			// console.log('_filterFreq', this._filterFreq, _lowpassFilter.frequency.value);
+		}
+
+		this.createInstruments = function() {
+			_instruments = [];
+			for (var i = 0; i < instrumentsConfig.length; i++) {
+				var tracks = this.createTracks(i, instrumentsConfig[i].tracks, instrumentsConfig[i].type);
+				var instrument = new museq.models.Instrument(i, instrumentsConfig[i].name, tracks, 1.0, instrumentsConfig[i].type, instrumentsConfig[i].color);
+				_instruments.push(instrument);
+			};
+
+			_availableInstruments = _instruments.concat();
+		};
+
+		this.createTracks = function(instrumentId, tracksConfig, type) {
+			console.log('createTracks');
+			var tracks = [];
+			for (var i = 0; i < tracksConfig.length; i++) {
+				var config = tracksConfig[i];
+
+				if (type === 'samples') {
+					var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, samplesPath + config.sampleUrl, 1.0);
+				} else {
+					var track = new museq.models.Track(instrumentId + '-' + i, config.name, null, null, 1.0);
+					track.note = config.note;
+					console.log('track', track);
+				};
+				tracks.push(track);
+			}
+
+			return tracks;
+		};
+
+		this.addInstrument = function(instrument) {
+			// Reset the notes of all the tracks
+			for (var n = 0, len = instrument.tracks.length; n < len; n += 1) {
+				var track = instrument.tracks[n];
+				instrument.tracks[n].resetNotes()
+			}
+			_availableInstruments.push(instrument);
+		};
+
+		this.getNextInstrument = function(clientId) {
+			if (typeof _clients[clientId] !== 'undefined') {
+				return _clients[clientId];
+			}
+
+			var numAvailableInstruments = _availableInstruments.length;
+			if (numAvailableInstruments === 0) {
+				console.log("No more instruments available");
+				return;
+			}
+
+			var nextInstrument = _availableInstruments[0];
+			_availableInstruments.shift();
+
+			// Initialize the instrument and call start when ready.
+			nextInstrument.initialize(this.start);
+			// Pass the context the instrument.
+			nextInstrument.setup(_context);
+
+			console.log("Released random instrument", nextInstrument);
+
+			_clients[clientId] = nextInstrument;
+			return nextInstrument;
+		};
+
+		this.getRandomInstrument = function(clientId) {
+			if (typeof _clients[clientId] !== 'undefined') {
+				return _clients[clientId];
+			}
+
+			var numAvailableInstruments = _availableInstruments.length;
+			if (numAvailableInstruments === 0) {
+				console.log("No instruments available");
+				return;
+			}
+
+			var randomIndex = Math.floor(Math.random() * numAvailableInstruments);
+			var randomInstrument = _availableInstruments[randomIndex];
+			_availableInstruments.splice(randomIndex, 1);
+
+			// Initialize the instrument and call start when ready.
+			randomInstrument.initialize(this.start);
+			// Pass the context the instrument.
+			randomInstrument.setup(_context);
+
+			console.log("Released random instrument", randomInstrument);
+
+			_clients[clientId] = randomInstrument;
+			return randomInstrument;
+		};
+
+		this.start = function() {
+
+			if (_started) return;
+			console.log('Started!', this);
+
+			_started = true;
+			_noteTime = 0.0;
+			// _startTime = _context.currentTime + 0.160;	
+			_startTime = _context.currentTime + 0.005;
+			_startTimeDraw = Date.now()/1000 + 0.005;
+			_self.schedule();
+
+		};
+
+		this.schedule = function() {
+			var currentTime = _context.currentTime;
+
+			var currentTimeDraw = Date.now()/1000;
+
+			// The sequence starts at startTime, so normalize currentTime so that it's 0 at the start of the sequence.
+			currentTime -= _startTime;
+			currentTimeDraw -= _startTimeDraw;
+
+			while (_noteTime < (currentTime + 0.200)) {
+
+//				alert('currentTime: ' + currentTime + "; noteTime: "+ _noteTime +"; startTime: "  + _startTime)	
+
+				// Convert noteTime to context time.
+				var contextPlayTime = _noteTime + _startTime;
+
+				for (var i = 0; i < _instruments.length; i++) {
+					for (var j = 0; j < _instruments[i].tracks.length; j++) {
+						var track = _instruments[i].tracks[j];
+						var volume = track.notes[_noteIndex];
+						if (_instruments[i].type === 'samples' && _instruments[i].isLoaded()) {
+							if (volume > 0) {
+								_self.playNote(track, contextPlayTime, volume);
+							}
+						} else if (_instruments[i].type === 'synth') {
+
+							if (volume > 0) {
+								_instruments[i].play(track.note);
+							} else {
+								_instruments[i].stop();
+							}
+						}
+					}
+				}
+
+				// Attempt to synchronize drawing time with sound
+				if (_noteTime != _lastDrawTime) {
+					_lastDrawTime = _noteTime;
+//					setInterval(function(){
+//					_self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
+//					}, 5);
+					_self.emit(museq.enums.Events.SEQUENCER_BEAT, _noteIndex);
+
+				}
+				_self.step();
+
+			}
+
+			requestAnimationFrame(_self.schedule);
+
+		};
+
+		this.playNote = function(track, noteTime, volume) {
+			// Create the note
+			var voice = _context.createBufferSource();
+			voice.buffer = track.getBuffer();
+
+//			alert(voice.buffer.length)
+
+//			alert(voice.buffer);
+
+//			// Create a gain node.
+			var gainNode = _context.createGain();
+//			// Connect the source to the gain node.
+			voice.connect(gainNode);
+
+			voice.playbackRate.value = this._playbackRate;
+
+			// Connect the gain node to the destination.
+//			gainNode.connect(_masterGainNode);
+
+
+			// Reduce the volume.
+//			gainNode.gain.value = volume;
+			gainNode.connect(_context.destination);
+
+			voice.connect(_context.destination);
+
+			if (!voice.start) {
+				voice.start = voice.noteOn;
+			}
+			voice.start(noteTime);
+		};
+
+		this.step = function() {
+			// Advance time by a 16th note...
+			var secondsPerBeat = 60.0 / _tempo;
+			_noteTime = _noteTime + 0.25 * secondsPerBeat;
+			_noteIndex++;
+
+			if (_noteIndex == _loopLength) {
+				_noteIndex = 0;
+				// pattern++;
+			}
+		};
+
+		this.updateNote = function(data) {
+
+			console.log('update note', data);
+
+			var trackId = data.trackId.split('-')[1];
+			var instrumentId = data.trackId.split('-')[0];
+			// TODO check the values MTF
+
+			_instruments[instrumentId].tracks[trackId].notes[data.note] = data.volume;
+			// _instruments[instrumentId].tracks[trackId].notes[data.noteId] = data.volume;
+
+//			this.saveBeat(_instruments);
+
+
+		};
+
+		this.playBeat = function() {
+
+
+
+		};
+
+		this.saveBeat = function(instruments) {
+			
+			$.ajax({
+				url: "./api/v1/beat/",
+				contentType:"application/json; charset=utf-8",
+				method: "POST",
+				data : JSON.stringify(instruments),
+				context: document.body
+			}).done(function(data) {
+				console.log(data);
+			});	
+
+		}
+
+		this.loadBeat = function() {
+
+			$.ajax({
+				url: "./api/v1/latest_winner/",
+				contentType:"application/json; charset=utf-8",
+				method: "GET",
+				context: document.body
+			}).done(function(beat) {
+
+				var instruments = beat.instruments;
+				console.log(instruments);
+
+				$.each(instruments, function(instrument_key, instrument) {
+					$.each(instrument.tracks, function(track_key, track) {
+						_instruments[instrument_key].tracks[track_key].notes = track.notes;
+					})
+				});
+
+				_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
+
+			});
+
+
+		};
+
+
+		this.updateFxParam = function(data) {
+			console.log('update fx param', data);
+
+			var fxConfig = effectsConfig[data.id];
+			paramX = fxConfig.x.param;
+			paramY = fxConfig.y.param;
+			valueX = this.interpolate(data.x, fxConfig.x.min, fxConfig.x.max);
+			valueY = this.interpolate(data.y, fxConfig.y.min, fxConfig.y.max);
+			this[paramX] = valueX;
+			this[paramY] = valueY;
+
+			console.log('update', paramX, ':', valueX);
+			console.log('update', paramY, ':', valueY);
+
+			this.setFxValues();
+		};
+
+		this.interpolate = function(value, minimum, maximum) {
+			return minimum + (maximum - minimum) * value;
+		}
+
+		this.initialize();
+
+	};
 
 }());
 
