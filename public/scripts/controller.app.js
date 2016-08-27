@@ -107,6 +107,8 @@
 				context: document.body
 			}).done(function(evolutionStatus) {
 				
+				$('#current-generation').text(evolutionStatus.generation);
+				
 				if (evolutionStatus.variantCount < 3) {
 					
 //					_homeView = new museq.views.HomeView(_el)

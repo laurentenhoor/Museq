@@ -25,6 +25,7 @@
 		var _lastDrawTime = -1;
 		
 		var _initialBeat = null;
+		var _newToAlerts = true;
 
 		var _self = this;
 		var _clients = {};
@@ -623,16 +624,25 @@
 					});				
 				});
 			});
+			$('#amount-of-changes').text(amountOfChanges);
 			
-			alert("We detected "+amountOfChanges + " changes!");
 			
-
+			if (amountOfChanges > 4) {
+				$('#mutation-warning').show();
+				$('#submit-btn').hide();
+			} else if (amountOfChanges > 0 ) {
+				$('#submit-btn').show();
+				$('#mutation-warning').hide();
+			} else {
+				$('#submit-btn').hide();
+			}
+			
 
 		};
 
+		
+		
 		this.playBeat = function() {
-
-
 
 		};
 
