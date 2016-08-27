@@ -12,12 +12,9 @@ var BeatSchema = new Schema({
 		default: Date.now
 	},
 	version : {
-		type: Number,
-		required: true
-	},
-	variant : {
-		type : Number,
-		required : true
+		generation : Number,
+		variant : Number,
+		winner : Boolean
 	},
 	votes : {
 		amount : {

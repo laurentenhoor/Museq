@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var StatusSchema = new Schema({
-	version : {
+	generation : {
 		type: Number,
 		default: 1
 	},

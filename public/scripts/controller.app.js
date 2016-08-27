@@ -74,6 +74,9 @@
 			_onGetInstrument(dummy);
 
 			_sequencerView.scrollInstrument();
+			
+			_sequencer.loadBeat();
+			
 			_sequencerView.show();
 
 
@@ -101,12 +104,12 @@
 				contentType:"application/json; charset=utf-8",
 				method: "GET",
 				context: document.body
-			}).done(function(beatVersion) {
+			}).done(function(evolutionStatus) {
 				
-				if (beatVersion.variantCount < 3) {
+				if (evolutionStatus.variantCount < 3) {
 					
 //					_homeView = new museq.views.HomeView(_el)
-					_self.loadSequencer();
+					_self.loadSequencer(evolutionStatus);
 					
 				} else {
 					

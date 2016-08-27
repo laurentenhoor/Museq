@@ -24,13 +24,15 @@ module.exports = function(router, passport) {
 			
 			function getVariantCount(status) {
 				
-				var currentVersion = status.version;
+				console.log(status)
 				
-				Beat.find({version: currentVersion}, function(err, beats) {
+				var currentGeneration = status.generation;
+				
+				Beat.find({'version.generation': currentGeneration}, function(err, beats) {
 					
 					var variantCount = beats.length;
 					
-					res.json({version: currentVersion, variantCount: variantCount});
+					res.json({currentGeneration: currentGeneration, variantCount: variantCount});
 					
 				});
 				

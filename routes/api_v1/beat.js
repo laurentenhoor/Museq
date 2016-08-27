@@ -2,6 +2,7 @@ module.exports = function(router, passport) {
 	
 	var authUtil = require('./authUtil');
 	var Beat = require('../../models/beat');
+	var Status = require('../../models/status');
 	
 	router.get('/beat/auth', passport.authenticate('jwt', { session: false}), function(req, res) {
 		res.send('Successful authorization of: '+ authUtil.getUserFromRequest(req));
@@ -14,6 +15,21 @@ module.exports = function(router, passport) {
 		});
 		
 	});
+	
+	router.get('/latest_winner', function(req, res) {
+		
+		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
+			
+			var previousGeneration = status.generation-1;
+			
+			Beat.findOne({'version.generation': previousGeneration, 'version.winner': true}, function(err, data) {
+			  res.json( data );
+			});
+			
+		});
+		
+	});
+
 
 	router.get('/beats_to_vote', function(req, res) {
 		
@@ -52,6 +68,7 @@ module.exports = function(router, passport) {
 		}
 		
 	});
+	
 
 	router.post('/beat', function(req, res) {
 

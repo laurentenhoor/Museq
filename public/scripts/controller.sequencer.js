@@ -490,7 +490,6 @@
         
         if (_started) return;
         console.log('Started!', this);
-        _self.loadBeat();
         
         _started = true;
         _noteTime = 0.0;
@@ -630,12 +629,13 @@
     this.loadBeat = function() {
     	
         $.ajax({
-      	  url: "./api/v1/beat/",
+      	  url: "./api/v1/latest_winner/",
       	  contentType:"application/json; charset=utf-8",
       	  method: "GET",
       	  context: document.body
-      	}).done(function(instruments) {
-      	  
+      	}).done(function(beat) {
+      		
+      		var instruments = beat.instruments;
       		console.log(instruments);
       		
       		$.each(instruments, function(instrument_key, instrument) {
