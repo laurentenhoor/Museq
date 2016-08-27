@@ -44,22 +44,6 @@
 		
 		this.loadHome = function(status) {
 			
-			$.ajax({
-				url: "./api/v1/status/",
-				contentType:"application/json; charset=utf-8",
-				method: "GET",
-				context: document.body
-			}).done(function(beatVersion) {
-				
-				if (beatVersion.variantCount < 3) {
-					
-					_homeView = new museq.views.HomeView(_el)
-					
-				} else {
-					_self.loadVote();
-				}	
-				
-			});
 			
 		}
 		
@@ -90,6 +74,7 @@
 			_onGetInstrument(dummy);
 
 			_sequencerView.scrollInstrument();
+			_sequencerView.show();
 
 
 		};
@@ -110,9 +95,31 @@
 
 		this.initialize = function() {
 
-			_self.loadHome();
-			_self.loadSequencer();
-			_self.loadVote();
+
+			$.ajax({
+				url: "./api/v1/status/",
+				contentType:"application/json; charset=utf-8",
+				method: "GET",
+				context: document.body
+			}).done(function(beatVersion) {
+				
+				if (beatVersion.variantCount < 3) {
+					
+//					_homeView = new museq.views.HomeView(_el)
+					_self.loadSequencer();
+					
+				} else {
+					
+					_self.loadVote();
+					
+				}	
+				
+			});
+			
+			
+//			_self.loadHome();
+//			_self.loadSequencer();
+//			_self.loadVote();
 
 
 		};
