@@ -36,9 +36,12 @@
 				contentType:"application/json; charset=utf-8",
 				method: "POST",
 				data : JSON.stringify(data),
-				context: document.body
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Authorization', window.localStorage.token);
+				}
 			}).done(function(status) {
 				console.log(status);
+				location.reload();
 			});
 
 

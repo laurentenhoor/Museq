@@ -132,11 +132,21 @@
 					}
 				}).done(function(evolutionStatus) {
 					
+					console.log(evolutionStatus);
+					
 					if (evolutionStatus.voting) {
-						_self.loadVote();
-	
+						if (evolutionStatus.voted) {
+							_self.loadWaiting(evolutionStatus);
+						} else {
+							_self.loadVote();							
+						}
 					} else {
-						_self.loadSequencer(evolutionStatus);
+						if (evolutionStatus.mutated) {
+							_self.loadWaiting(evolutionStatus);
+						} else {
+							_self.loadSequencer(evolutionStatus);
+						}
+						
 					}
 					
 				});

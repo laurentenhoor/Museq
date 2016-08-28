@@ -4,10 +4,6 @@ module.exports = function(router, passport) {
 	var Beat = require('../../models/beat');
 	var Status = require('../../models/status');
 
-	router.get('/beat/auth', passport.authenticate('jwt', { session: false}), function(req, res) {
-		res.send('Successful authorization of: '+ authUtil.getUserFromRequest(req));
-	});
-
 	router.get('/beat', function(req, res) {
 
 		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
@@ -68,7 +64,7 @@ module.exports = function(router, passport) {
 							
 							console.log(beat.votes.amount);
 							
-							// Winner beat!
+							// Winning beat!!
 							if(beat.votes.amount >= 2) {
 								Status.findOneAndUpdate({generation: beat.version.generation}, {winner: beatId}, function(err){});
 								Beat.update({_id: beatId}, {'version.winner': true}, function(err) {});

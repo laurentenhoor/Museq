@@ -5,12 +5,9 @@ module.exports = function(router, passport) {
 	var Beat = require('../../models/beat');
 
 	router.get('/status', passport.authenticate('jwt', { session: false}), function(req, res) {
-
-		// TODO
-		// case 1: waiting for # more votes until next generation, you have voted for this, 
-		//		   create a mutation in advance, or play around in sandbox mode
-		// case 2: not enough mutations in generation #, please create one here!'
-
+	
+		var user = authUtil.getUserFromRequest(req);
+		
 		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
 
 			if (!status) {
@@ -24,13 +21,37 @@ module.exports = function(router, passport) {
 
 			function returnStatus(status) {
 				
-				Beat.count({'version.generation': status.generation}, function(err, amount) {
+				Beat.find({'version.generation': status.generation}, function(err, beats) {
+				
+					console.log(beats)
 					
-					if (amount < 3) {
+					var voted = false;
+					var mutated = false;
+					
+					// Look for logged in username in the authors and voters of beats
+					beats.forEach(function(beat) { 
+						if (beat.votes.users.indexOf(user) > -1) {
+							voted = true;
+						}
+						if (beat.username == user) {
+							mutated = true;
+						}
+					});
+					
+					// Re-enable voting if entries are manually deleted from DB
+					if (beats.length < 3) {
 						status.voting = false;
 					}
+				
+					var data = {
+						user: user,
+						generation: status.generation,
+						voting: status.voting,
+						voted: voted,
+						mutated: mutated
+					};
 					
-					res.json(status);
+					res.json(data);
 					
 				});
 				
