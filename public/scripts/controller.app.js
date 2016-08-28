@@ -54,6 +54,7 @@
 			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
 			$('#current-generation').text(evolutionStatus.generation-1);
+			$('#sequencer-header').show();
 			
 			
 			_sequencer.on(museq.enums.Events.SEQUENCER_BEAT, function(beat) {
@@ -89,13 +90,12 @@
 			_sequencerView.show();
 //			_sequencer.start();
 
-
 		};
-
 		
 		this.loadVote = function() {
 			
 			$('table').hide();
+			$('#vote-header').show();
 			
 			$.ajax({
 				url: "./api/v1/beats_to_vote/",
@@ -127,11 +127,9 @@
 				
 			});
 			
-			
 //			_self.loadHome();
 //			_self.loadSequencer();
 //			_self.loadVote();
-
 
 		};
 		
