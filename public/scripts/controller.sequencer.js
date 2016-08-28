@@ -646,12 +646,11 @@
 
 		};
 
-		this.saveBeat = function(username, generation) {			
+		this.saveBeat = function(generation) {			
 			
 			console.log('saveBeat(user, generation)');
 			
 			data = {
-					username : username,
 					version : {
 						generation: generation
 					},

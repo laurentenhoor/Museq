@@ -11,6 +11,10 @@ var StatusSchema = new Schema({
 		required: true,
 		default: Date.now
 	},
+	voting : {
+		type: Boolean,
+		default: false,
+	},
 	winner : {
 		type: Schema.Types.ObjectId,
 		default: null

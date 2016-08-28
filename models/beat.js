@@ -14,7 +14,7 @@ var BeatSchema = new Schema({
 	version : {
 		generation : Number,
 		variant : Number,
-		winner : Boolean
+		winner : {type: Boolean, default: false}
 	},
 	votes : {
 		amount : {

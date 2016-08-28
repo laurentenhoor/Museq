@@ -69,24 +69,50 @@ module.exports = function(router, passport) {
 		
 	});
 	
-
+	// Save beat
 	router.post('/beat', function(req, res) {
 
 		var user = authUtil.getUserFromRequest(req);
 		var beat = req.body;
 		
-		var newBeat = new Beat({
-			username: user,
-			instruments: beat
+		Beat.count({'version.generation': beat.version.generation}, function(err, variantCount) {
+			
+			var newVariant = variantCount+1;
+			
+			var newBeat = new Beat({
+				username: user,
+				instruments: beat.instruments,
+				version : {
+					generation: beat.version.generation,
+					variant : newVariant
+				}
+			});
+			
+			newBeat.save(function(err) {
+				if (err) {
+					return res.json({success: false, msg: 'Failed to save beat.'});
+				}
+				
+				if (newVariant >= 3) {
+					
+					Status.findOneAndUpdate({generation: beat.version.generation}, {voting : true}, function(err) {				
+						
+						if (err) {
+							res.json({success: true, msg: 'Successful saved beat BUT unable to store generation status.'});
+						}
+						res.json({success: true, msg: 'Successful saved beat and updated generation status.'});
+						
+					});
+					
+				} else {
+					res.json({success: true, msg: 'Successful saved beat.'});
+				}
+				
+				
+			});
+			
 		});
-		
-		newBeat.save(function(err) {
-			if (err) {
-				return res.json({success: false, msg: 'Failed to save beat.'});
-			}
-			res.json({success: true, msg: 'Successful saved beat.'});
-		});
-		
+				
 	});	
 
 			

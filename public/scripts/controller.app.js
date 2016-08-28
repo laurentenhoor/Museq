@@ -14,8 +14,7 @@
 
 		var _self = this;
 
-		var _appStatus;
-		var _username = 'henknozemans'
+		var _appStatus;	
 
 		var _onGetInstrument = function(data) {
 
@@ -67,9 +66,8 @@
 			_sequencerView.on(museq.enums.Events.SAVE_BEAT, function(instruments) {
 				
 				console.log(evolutionStatus);
-				console.log(_username);
 				
-				_sequencer.saveBeat(_username, evolutionStatus.currentGeneration);
+				_sequencer.saveBeat(evolutionStatus.currentGeneration);
 				console.log('Event SAVE BEAT triggered.');
 			});
 
