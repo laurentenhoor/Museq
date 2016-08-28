@@ -96,7 +96,9 @@
 
     MODIFIER_CHANGE: 'modifier_change',
     
-    LOAD_PATTERN: 'load_pattern'
+    LOAD_PATTERN: 'load_pattern',
+    
+    SAVE_BEAT: 'save_beat'
     	
   };
 

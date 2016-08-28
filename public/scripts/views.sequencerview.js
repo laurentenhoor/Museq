@@ -55,6 +55,14 @@
         var _addEventListeners = function() {
           $table.on('click', 'td', _onToggleNote);
           $table.on('click', 'td:nth-child(1)', _self.scrollInstrument)
+          
+          $('body').on('click', '#save-beat-btn', function() {
+        	  
+        	  console.log('clicked #save-beat-btn');
+        	  
+        	  _self.emit(museq.enums.Events.SAVE_BEAT, {});
+          });
+          
         };
         
       this.redrawNotes = function(instruments) {

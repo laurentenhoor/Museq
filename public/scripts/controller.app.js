@@ -1,7 +1,7 @@
 (function() {
 
 	museq.App = function(el) {
-
+		
 		var _instruments = {};
 		var _totalInstruments = 0;
 		var _sequencer;
@@ -15,6 +15,7 @@
 		var _self = this;
 
 		var _appStatus;
+		var _username = 'henknozemans'
 
 		var _onGetInstrument = function(data) {
 
@@ -48,7 +49,7 @@
 		}
 		
 		
-		this.loadSequencer = function() {
+		this.loadSequencer = function(evolutionStatus) {
 			
 			_sequencer = new museq.Sequencer();
 
@@ -61,6 +62,15 @@
 			});
 			_sequencer.on(museq.enums.Events.LOAD_PATTERN, function(instruments) {
 				_sequencerView.redrawNotes(instruments);
+			});
+			
+			_sequencerView.on(museq.enums.Events.SAVE_BEAT, function(instruments) {
+				
+				console.log(evolutionStatus);
+				console.log(_username);
+				
+				_sequencer.saveBeat(_username, evolutionStatus.currentGeneration);
+				console.log('Event SAVE BEAT triggered.');
 			});
 
 			var dummy = {};
@@ -128,6 +138,11 @@
 //			_self.loadVote();
 
 
+		};
+		
+		
+		this.getAppStatus = function() {
+			return _appStatus;
 		};
 
 		this.initialize();

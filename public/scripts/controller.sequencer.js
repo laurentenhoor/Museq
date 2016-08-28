@@ -629,12 +629,12 @@
 			
 			if (amountOfChanges > 4) {
 				$('#mutation-warning').show();
-				$('#submit-btn').hide();
+				$('#save-beat-btn').hide();
 			} else if (amountOfChanges > 0 ) {
-				$('#submit-btn').show();
+				$('#save-beat-btn').show();
 				$('#mutation-warning').hide();
 			} else {
-				$('#submit-btn').hide();
+				$('#save-beat-btn').hide();
 			}
 			
 
@@ -646,13 +646,23 @@
 
 		};
 
-		this.saveBeat = function(instruments) {
+		this.saveBeat = function(username, generation) {			
+			
+			console.log('saveBeat(user, generation)');
+			
+			data = {
+					username : username,
+					version : {
+						generation: generation
+					},
+					instruments : _instruments,
+			};
 			
 			$.ajax({
 				url: "./api/v1/beat/",
 				contentType:"application/json; charset=utf-8",
 				method: "POST",
-				data : JSON.stringify(instruments),
+				data : JSON.stringify(data),
 				context: document.body
 			}).done(function(data) {
 				console.log(data);
