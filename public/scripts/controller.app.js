@@ -42,9 +42,15 @@
 		};
 
 		
-		this.loadHome = function(status) {
+		this.loadWaiting = function(status) {
 			
-		}
+			if (status.voting ) {
+				
+			} else {
+				
+			}
+			
+		};
 		
 		
 		this.loadSequencer = function(evolutionStatus) {
@@ -107,6 +113,7 @@
 			}).done(function(beats_to_vote) {
 				_voteView = new museq.views.VoteView(_el, new museq.Vote(beats_to_vote));
 			});
+			
 		}
 		
 		
