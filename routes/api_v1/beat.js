@@ -16,7 +16,7 @@ module.exports = function(router, passport) {
 
 	});
 
-	router.get('/latest_winner', function(req, res) {
+	router.get('/latest_winner', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
 
@@ -31,7 +31,7 @@ module.exports = function(router, passport) {
 	});
 
 
-	router.get('/beats_to_vote', function(req, res) {
+	router.get('/beats_to_vote', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 
 		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
@@ -48,7 +48,7 @@ module.exports = function(router, passport) {
 		
 	});
 
-	router.post('/vote', function(req, res) {
+	router.post('/vote', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 		var user = authUtil.getUserFromRequest(req);
 
@@ -91,7 +91,7 @@ module.exports = function(router, passport) {
 	});
 
 	// Save beat
-	router.post('/beat', function(req, res) {
+	router.post('/beat', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 		var user = authUtil.getUserFromRequest(req);
 		var beat = req.body;

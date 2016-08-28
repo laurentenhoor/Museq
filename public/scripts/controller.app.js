@@ -101,30 +101,51 @@
 				url: "./api/v1/beats_to_vote/",
 				contentType:"application/json; charset=utf-8",
 				method: "GET",
-				context: document.body
+				beforeSend : function(xhr) {
+					xhr.setRequestHeader('Authorization', window.localStorage.token);
+				}
 			}).done(function(beats_to_vote) {
 				_voteView = new museq.views.VoteView(_el, new museq.Vote(beats_to_vote));
 			});
 		}
 		
+		
+		this.loadLogin = function() {
+			
+			new museq.views.LoginView();
+			
+		};
+		
 
 		this.initialize = function() {
 
-			$.ajax({
-				url: "./api/v1/status/",
-				contentType:"application/json; charset=utf-8",
-				method: "GET",
-				context: document.body
-			}).done(function(evolutionStatus) {
+//			window.localStorage.removeItem('token');
+			
+			if (window.localStorage.token) {
+						
+				$.ajax({
+					url: "./api/v1/status/",
+					contentType:"application/json; charset=utf-8",
+					method: "GET",
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader('Authorization', window.localStorage.token);
+					}
+				}).done(function(evolutionStatus) {
+					
+					if (evolutionStatus.voting) {
+						_self.loadVote();
+	
+					} else {
+						_self.loadSequencer(evolutionStatus);
+					}
+					
+				});
 				
-				if (evolutionStatus.voting) {
-					_self.loadVote();
-
-				} else {
-					_self.loadSequencer(evolutionStatus);
-				}	
+			} else {
 				
-			});
+				_self.loadLogin();
+				
+			}
 			
 //			_self.loadHome();
 //			_self.loadSequencer();
@@ -132,10 +153,6 @@
 
 		};
 		
-		
-		this.getAppStatus = function() {
-			return _appStatus;
-		};
 
 		this.initialize();
 

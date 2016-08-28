@@ -4,7 +4,7 @@ module.exports = function(router, passport) {
 	var Status = require('../../models/status');
 	var Beat = require('../../models/beat');
 
-	router.get('/status', function(req, res) {
+	router.get('/status', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 		// TODO
 		// case 1: waiting for # more votes until next generation, you have voted for this, 
