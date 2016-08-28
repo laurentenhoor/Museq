@@ -25,30 +25,39 @@
   	
   	<div id="sequencer-header" class="navigation" style="color:white; margin:10px; display:none;">
   		<span id="header-text">
-  		This is generation 
-  		<span id="current-generation">0</span>
-  		 with 
-  		<span id="amount-of-changes">0</span>
-  		 mutations. 
-  		 <span id="save-beat-btn" style="text-decoration: underline;display:none;">Submit for natural selection!</span>
+  		Mutate generation 
+  		<span class="current-generation">0</span>
+  		with <span id="amount-of-changes">0</span>
+  		 changes<br> 
+  		 <span id="save-beat-btn" style="text-decoration: underline;display:none;"><b>Submit for natural selection!</b></span>
   		 <span id="mutation-warning" style="display: none;">With too many mutations it will become a different species!</span>
   		 </span>
   	</div>
   	
   	<div id="vote-header" class="navigation" style="color:white; margin:10px; display: none;">
   		<span id="header-text">
-  		Natural select the strongest composition of generation 
-  		<span id="current-generation">0</span>:
+  		Pick the strongest variant of generation 
+  		<span class="current-generation">0</span>
   	</span>
   	</div>
   	
   	<div id="waiting-vote" class="navigation" style="color:white; margin:10px; display: none;">
   		<span id="header-text">
-  		Hi <span class="username"></span>!<br><br>
-  		Thank you for voting.
-  		<br><br>
   		We are currently waiting for at least <span class="waiting-votes-amount"></span> more vote(s) for generation <span class="generation"></span>.
-  	</span>
+  		<br><br>
+  		You (<span class="username"></span>) already contributed. <br><br><b>Who voted?</b><br>
+  		<span id="voters-list">
+  		</span>
+  		</span>
+  	</div>
+  	
+  	<div id="waiting-sequencer" class="navigation" style="color:white; margin:10px; display: none;">
+  		<span id="header-text">
+  		We are waiting for <span class="waiting-compositions-amount"></span> more variants of generation <span class="generation"></span> before the natural selection process will start.
+  		<br><br>
+  		You (<span class="username"></span>) already contributed.  
+  		</span>
+  		</span>
   	</div>
   	
     <table>

@@ -44,15 +44,32 @@
 		
 		this.loadWaiting = function(status) {
 			
+			
+			$(".username").text(status.user);
+			$(".generation").text(status.generation);
+			
+			
 			if (status.voting ) {
-				$(".username").text(status.user);
-				$(".generation").text(status.generation);
+			
 				$(".waiting-votes-amount").text(1);
+				$.each(status.voters, function(key, user) {
+					$('#voters-list').append(user+'<br>')
+				});
+				
 				$('#waiting-vote').show();
+				
 				
 			} else {
 				
+				$(".waiting-compositions-amount").text(3-status.variants);
+				$('#waiting-sequencer').show();
+				
 			}
+			
+			
+			setInterval(function() {
+				location.reload();
+				}, 3000)
 			
 		};
 		
@@ -63,7 +80,7 @@
 
 			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
-			$('#current-generation').text(evolutionStatus.generation-1);
+			$('.current-generation').text(evolutionStatus.generation-1);
 			$('#sequencer-header').show();
 			
 			
@@ -102,10 +119,11 @@
 
 		};
 		
-		this.loadVote = function() {
+		this.loadVote = function(status) {
 			
 			$('table').hide();
 			$('#vote-header').show();
+			$('.current-generation').text(status.generation);
 			
 			$.ajax({
 				url: "./api/v1/beats_to_vote/",
@@ -149,7 +167,7 @@
 						if (evolutionStatus.voted) {
 							_self.loadWaiting(evolutionStatus);
 						} else {
-							_self.loadVote();							
+							_self.loadVote(evolutionStatus);							
 						}
 					} else {
 						if (evolutionStatus.mutated) {

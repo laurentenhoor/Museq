@@ -27,15 +27,19 @@ module.exports = function(router, passport) {
 					
 					var voted = false;
 					var mutated = false;
+					var voters = [];
 					
 					// Look for logged in username in the authors and voters of beats
-					beats.forEach(function(beat) { 
+					beats.forEach(function(beat) {
 						if (beat.votes.users.indexOf(user) > -1) {
 							voted = true;
 						}
 						if (beat.username == user) {
 							mutated = true;
 						}
+						beat.votes.users.forEach(function(user) {
+							voters.push(user);
+						});
 					});
 					
 					// Re-enable voting if entries are manually deleted from DB
@@ -48,6 +52,8 @@ module.exports = function(router, passport) {
 						generation: status.generation,
 						voting: status.voting,
 						voted: voted,
+						voters: voters,
+						variants: beats.length,
 						mutated: mutated
 					};
 					
