@@ -33,17 +33,17 @@ var BeatSchema = new Schema({
 	}
 });
 
-BeatSchema.methods.vote = function (user) {
+BeatSchema.methods.vote = function (user, success) {
 	var beat = this;
 	
 	if (!beat.votes.users){
 		console.error('Unable to find voting fields in database...')
-		return null;
+		success(false);
 	}
 	
-    if ((beat.votes.users.indexOf(user) > -1)) {
+    if (false){//((beat.votes.users.indexOf(user) > -1)) {
     	console.error(user + " already voted!")
-    	return null;
+    	success(false);
     } else {
     	beat.update({
     		$push: {'votes.users': user}, 
@@ -52,7 +52,7 @@ BeatSchema.methods.vote = function (user) {
     		upsert:true
     	}, function(err, msg) {
     		console.log(user + ' voted for beat ' + beat._id);
-    		return msg.ok;
+    		success(true);
     	});
     	
     }    

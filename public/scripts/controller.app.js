@@ -44,7 +44,6 @@
 		
 		this.loadHome = function(status) {
 			
-			
 		}
 		
 		
@@ -54,6 +53,8 @@
 
 			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
+			$('#current-generation').text(evolutionStatus.generation-1);
+			
 			
 			_sequencer.on(museq.enums.Events.SEQUENCER_BEAT, function(beat) {
 				_sequencerView.drawPlayhead(beat);
@@ -67,7 +68,7 @@
 				
 				console.log(evolutionStatus);
 				
-				_sequencer.saveBeat(evolutionStatus.currentGeneration);
+				_sequencer.saveBeat(evolutionStatus.generation);
 				console.log('Event SAVE BEAT triggered.');
 			});
 
@@ -94,6 +95,8 @@
 		
 		this.loadVote = function() {
 			
+			$('table').hide();
+			
 			$.ajax({
 				url: "./api/v1/beats_to_vote/",
 				contentType:"application/json; charset=utf-8",
@@ -115,17 +118,11 @@
 				context: document.body
 			}).done(function(evolutionStatus) {
 				
-				$('#current-generation').text(evolutionStatus.generation);
-				
-				if (evolutionStatus.variantCount < 3) {
-					
-//					_homeView = new museq.views.HomeView(_el)
-					_self.loadSequencer(evolutionStatus);
-					
-				} else {
-					
+				if (evolutionStatus.voting) {
 					_self.loadVote();
-					
+
+				} else {
+					_self.loadSequencer(evolutionStatus);
 				}	
 				
 			});

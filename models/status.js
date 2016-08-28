@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var StatusSchema = new Schema({
 	generation : {
 		type: Number,
-		default: 1
+		default: 1,
+		unique: true
 	},
 	created : {
 		type: Date,

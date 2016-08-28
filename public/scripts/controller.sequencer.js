@@ -665,6 +665,7 @@
 				context: document.body
 			}).done(function(data) {
 				console.log(data);
+				location.reload();
 			});	
 
 		}
