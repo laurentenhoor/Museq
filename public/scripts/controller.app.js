@@ -45,6 +45,10 @@
 		this.loadWaiting = function(status) {
 			
 			if (status.voting ) {
+				$(".username").text(status.user);
+				$(".generation").text(status.generation);
+				$(".waiting-votes-amount").text(1);
+				$('#waiting-vote').show();
 				
 			} else {
 				
