@@ -110,7 +110,6 @@
 
 		this.initialize = function() {
 
-
 			$.ajax({
 				url: "./api/v1/status/",
 				contentType:"application/json; charset=utf-8",
