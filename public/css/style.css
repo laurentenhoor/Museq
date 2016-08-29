@@ -14,6 +14,9 @@ html, body {
   text-align: center;
   }
 
+h1 {
+	font-size:1.15em;
+}
 
 #login {
 	color:white;
@@ -41,8 +44,7 @@ button {
 input {
 	background: lightgrey;
 	height: 20px;
-	
-	font-size: 0.75em
+	font-size: 0.84em
 }
 
 button:disabled {
