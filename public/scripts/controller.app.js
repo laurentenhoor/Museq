@@ -1,7 +1,7 @@
 (function() {
 
 	museq.App = function(el) {
-
+		
 		var _instruments = {};
 		var _totalInstruments = 0;
 		var _sequencer;
@@ -77,8 +77,10 @@
 
 			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
+			
 			$('.current-generation').text(evolutionStatus.generation-1);
 			$('#sequencer-header').show();
+			$('table').show();
 
 			_sequencer.on(museq.enums.Events.SEQUENCER_BEAT, function(beat) {
 				_sequencerView.drawPlayhead(beat);
@@ -158,6 +160,7 @@
 					if (evolutionStatus.voting) {
 						if (evolutionStatus.voted) {
 							_self.loadWaiting(evolutionStatus);
+							
 						} else {
 							_self.loadVote(evolutionStatus);							
 						}
@@ -166,6 +169,7 @@
 							_self.loadWaiting(evolutionStatus);
 						} else {
 							$('#sequencer-intro').show();
+							
 							$('.previous-generation').text(evolutionStatus.generation-1);
 							$('#prev-gen-winner').text(evolutionStatus.winnerPrevGen)
 							$('#sequencer-start-btn').on('click', function() {

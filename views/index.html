@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
+  
   <section id="museq">
   
   	<div id="login">
-  	
+  		<br>
   		<b>Humanity is teaming up to create the one and only perfect music composition.</b>
 		<br><br>
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
@@ -46,7 +46,7 @@
   		Currently <span id="amount-of-changes">0</span>
   		 mutations.<br> 
   		 <span id="save-beat-btn" style="text-decoration: underline;display:none;"><b>Submit for natural selection!</b></span>
-  		 <span id="mutation-warning" style="display: none;">With too many mutations it will become a different species!</span>
+  		 <span id="mutation-warning" style="display: none;">Too many mutations will evolute distinct species!</span>
   		 </span>
   	</div>
   	
@@ -78,7 +78,7 @@
   		</span>
   	</div>
   	
-    <table>
+    <table style="display:none;">
     </table>
   </section>
 
@@ -109,10 +109,8 @@
 // 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 // 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 // 	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	
 // 	  ga('create', 'UA-82777201-1', 'auto');
 // 	  ga('send', 'pageview');
-	
 	</script>
 
   <script>
@@ -120,47 +118,9 @@
       new FastClick(document.body);
     }, false);
 
-	
-// 	$( document ).ready(function(){
-// 		$('#start_btn').show();
-// 		$('#start_btn').on('click', function() {
-// 			
-// 			$(this).hide();
-// 		})	
-// 	});
-	
 	new museq.App('#museq')
-		
-	
-	var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-               navigator.userAgent && !navigator.userAgent.match('CriOS');
-               
-	
-	function doOnOrientationChange()
-	  {
-	    switch(window.orientation) 
-	    { 
-	      case -90:
-	      	if (isSafari) {
-	      		alert("Full Screen");
-	       }
-	      	break;
-	      case 90:
-	        if (isSafari) {
-	      		alert("Full Screen");
-	       }
-	      	break;
 
-	      default:
-
-	        break; 
-	    }
-	  }
-	
-	  window.addEventListener('orientationchange', doOnOrientationChange);
-	
    </script>
-
 
 </body>
 </html>

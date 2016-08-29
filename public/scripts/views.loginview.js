@@ -103,6 +103,7 @@
 					if (response.success) {
 						console.log(response)
 						window.localStorage.setItem('token', response.token);
+						window.scrollTo(1,1);
 						location.reload();
 					} else {
 						$('#login-message').text('Wrong username or password!');

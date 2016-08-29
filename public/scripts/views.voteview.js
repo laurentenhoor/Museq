@@ -51,7 +51,7 @@
 			$.each(_voteController.getBeats(), function(beatKey, beat) {
 				
 				$playBtn = $('<button>').addClass('play').text('Play')
-				$voteBtn = $('<button>').addClass('vote').text('Vote')//.prop('disabled', true);
+				$voteBtn = $('<button>').addClass('vote').text('Vote').prop('disabled', true);
 				
 				$playBtn.on('click', function(){
 					if ($('button.play').hasClass('playing'))

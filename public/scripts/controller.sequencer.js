@@ -644,10 +644,6 @@
 			$('table').css('height', (97-($('#sequencer-header').outerHeight()/$(window).innerHeight()*100))+'%');
 		}
 		
-		
-		this.playBeat = function() {
-
-		};
 
 		this.saveBeat = function(generation) {			
 			
@@ -700,6 +696,7 @@
 				_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
 				updateViewport();
 				
+//				setInterval(function() {_self.start()}, 1000);
 				_self.start();
 				
 			});

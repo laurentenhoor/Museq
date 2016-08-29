@@ -20,6 +20,9 @@ html, body {
 	margin: 10px;
 	display: none;
 }
+#login-message {
+	color:red;
+}
 
 /* input, */
 button {
