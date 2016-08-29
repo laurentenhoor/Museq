@@ -27,3 +27,10 @@ User Flow Scenario:
 	b)	
 	
 Vote and plays
+
+
+Todo airplane
+-	Adjust viewport size of sequencer including text on top
+-	Play on mobile phone - sound after touch
+-	Login screen nice buttons + copy introduction story
+-	Enable disable/enable of vote buttons for production mode

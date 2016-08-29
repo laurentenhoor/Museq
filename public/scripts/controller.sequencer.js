@@ -637,9 +637,13 @@
 				$('#save-beat-btn').hide();
 			}
 			
+			updateViewport();
 
 		};
 
+		updateViewport = function() {
+			$('table').css('height', (97-($('#sequencer-header').outerHeight()/$(window).innerHeight()*100))+'%');
+		}
 		
 		
 		this.playBeat = function() {
@@ -695,9 +699,11 @@
 				});
 
 				_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
-
+				updateViewport();
+				
 			});
 
+			
 
 		};
 
