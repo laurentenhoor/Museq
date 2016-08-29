@@ -78,7 +78,6 @@
 						$('#login-message').text(response.msg);
 					} 
 
-
 				});
 
 			});
