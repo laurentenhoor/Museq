@@ -173,7 +173,11 @@
 						if (evolutionStatus.mutated) {
 							_self.loadWaiting(evolutionStatus);
 						} else {
-							_self.loadSequencer(evolutionStatus);
+							$('#sequencer-intro').show();
+							$('#sequencer-start-btn').on('click', function() {
+								$('#sequencer-intro').hide();
+								_self.loadSequencer(evolutionStatus);
+							});
 						}
 						
 					}

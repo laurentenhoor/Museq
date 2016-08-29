@@ -611,7 +611,6 @@
 
 //			this.saveBeat(_instruments);
 			
-			
 			// Check for changes
 			var amountOfChanges = 0;
 			
@@ -701,9 +700,9 @@
 				_self.emit(museq.enums.Events.LOAD_PATTERN, _instruments);
 				updateViewport();
 				
+				_self.start();
+				
 			});
-
-			
 
 		};
 
