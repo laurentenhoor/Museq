@@ -6,6 +6,8 @@ module.exports = function(router, passport) {
 
 	router.get('/status', passport.authenticate('jwt', { session: false}), function(req, res) {
 	
+		console.log('GET /status');
+		
 		var user = authUtil.getUserFromRequest(req);
 		
 		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
@@ -22,13 +24,10 @@ module.exports = function(router, passport) {
 			function returnStatus(status) {
 				
 				Beat.find({'version.generation': status.generation}, function(err, beats) {
-				
-					console.log(beats)
 					
 					var voted = false;
 					var mutated = false;
 					var voters = [];
-					
 					
 					// Look for logged in username in the authors and voters of beats
 					beats.forEach(function(beat) {
