@@ -134,9 +134,7 @@
 
 
 		this.loadLogin = function() {
-
 			new museq.views.LoginView();
-
 		};
 
 
@@ -168,6 +166,8 @@
 							_self.loadWaiting(evolutionStatus);
 						} else {
 							$('#sequencer-intro').show();
+							$('.previous-generation').text(evolutionStatus.generation-1);
+							$('#prev-gen-winner').text(evolutionStatus.winnerPrevGen)
 							$('#sequencer-start-btn').on('click', function() {
 								$('#sequencer-intro').hide();
 								_self.loadSequencer(evolutionStatus);

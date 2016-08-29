@@ -6,7 +6,7 @@ module.exports = function(router, passport) {
 	var config = require('../../config/database');
 	
 	var authUtil = require('./authUtil');
-
+	
 	
 	router.post('/signup', function(req, res) {
 		if (!req.body.name || !req.body.password) {

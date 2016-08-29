@@ -15,14 +15,27 @@
   <section id="museq">
   
   	<div id="login">
+  	
+  		<b>Humanity is teaming up to create the one and only perfect music composition.</b>
+		<br><br>
+		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
+		<br><br>
+		Start your contribution to perfect music now...
+  		<br><br>
   		username <input class="form" id="username-input" type="text"></input><br><br>
   		password <input class="form" id="password-input" type="password"></input><br>
   		<span id="login-message"></span><br>
   		<button id="login-btn">login</button> <button id="join-btn">join</button>
   	</div>
   	
-  	<div id="sequencer-intro" style="display:none;">
+  	<div id="sequencer-intro" class="navigation" style="color:white; margin:10px; display:none;>
+	  	<span id="header-text">
+	  	<span id="prev-gen-winner"></span> created the winning variant of generation <span class="previous-generation">0</span>.
+	  	<br><b>Please contribute to the next generation!</b>
+	  	<br>
+	  	</span>
 	  	<button id="sequencer-start-btn" >Start</button>
+	  	
   	</div>
   	
   	<div id="sequencer-header" class="navigation" style="color:white; margin:10px; display:none;">
@@ -58,7 +71,9 @@
   		<span id="header-text">
   		We are waiting for <span class="waiting-compositions-amount"></span> more variants of generation <span class="generation"></span> before the natural selection process will start.
   		<br><br>
-  		You (<span class="username"></span>) already contributed.  
+  		<b>You (<span class="username"></span>) already contributed.</b>
+  		<br><br>
+  		Wait here or come back whenever you want.  
   		</span>
   		</span>
   	</div>

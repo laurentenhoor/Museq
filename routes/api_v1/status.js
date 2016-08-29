@@ -29,6 +29,7 @@ module.exports = function(router, passport) {
 					var mutated = false;
 					var voters = [];
 					
+					
 					// Look for logged in username in the authors and voters of beats
 					beats.forEach(function(beat) {
 						if (beat.votes.users.indexOf(user) > -1) {
@@ -47,17 +48,25 @@ module.exports = function(router, passport) {
 						status.voting = false;
 					}
 				
-					var data = {
-						user: user,
-						generation: status.generation,
-						voting: status.voting,
-						voted: voted,
-						voters: voters,
-						variants: beats.length,
-						mutated: mutated
-					};
+					Beat.findOne({'version.generation': status.generation-1, 'version.winner': true}, function(err, beat) {
+						
+						var data = {
+								user: user,
+								generation: status.generation,
+								voting: status.voting,
+								voted: voted,
+								voters: voters,
+								variants: beats.length,
+								winnerPrevGen: beat.username,
+								mutated: mutated
+							};
+						
+						res.json(data);
+					})
 					
-					res.json(data);
+					
+					
+					
 					
 				});
 				
