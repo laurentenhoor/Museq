@@ -35,7 +35,13 @@ button {
   margin:10px;
   }
   
-/*  */input,
+input {
+	background: lightgrey;
+	height: 20px;
+	
+	font-size: 0.75em
+}
+
 button:disabled {
 	background:grey;
 }
