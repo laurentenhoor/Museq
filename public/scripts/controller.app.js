@@ -126,7 +126,7 @@
 				contentType:"application/json; charset=utf-8",
 				method: "GET",
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader('Authorization', window.localStorage.token);
+					xhr.setRequestHeader('Authorization', $.cookie("token"));
 				}
 			}).done(function(beats_to_vote) {
 				_voteView = new museq.views.VoteView(_el, new museq.Vote(beats_to_vote));
@@ -143,15 +143,17 @@
 		this.initialize = function() {
 
 //			window.localStorage.removeItem('token');
-
-			if (window.localStorage.token) {
+			document.cookie = "";
+			
+			
+			if ($.cookie("token")) {
 
 				$.ajax({
 					url: "./api/v1/status/",
 					contentType:"application/json; charset=utf-8",
 					method: "GET",
 					beforeSend : function(xhr) {
-						xhr.setRequestHeader('Authorization', window.localStorage.token);
+						xhr.setRequestHeader('Authorization', $.cookie("token"));
 					}
 				}).done(function(evolutionStatus) {
 

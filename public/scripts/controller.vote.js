@@ -37,7 +37,7 @@
 				method: "POST",
 				data : JSON.stringify(data),
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader('Authorization', window.localStorage.token);
+					xhr.setRequestHeader('Authorization', $.cookie("token"));
 				}
 			}).done(function(status) {
 				console.log(status);

@@ -47,7 +47,7 @@
 
 				var username = $('#username-input').val();
 				var password = $('#password-input').val();
-
+				
 				login(username, password);
 
 			});
@@ -68,8 +68,7 @@
 					url: "./api/v1/signup/",
 					contentType:"application/json; charset=utf-8",
 					method: "POST",
-					data: JSON.stringify(data),
-					context: document.body
+					data: JSON.stringify(data)
 				}).done(function(response) {
 
 					if (response.success) {
@@ -88,26 +87,25 @@
 						name : username,
 						password : password
 				};
-
+				
 				console.log(data);
 
 				$.ajax({
 					url: "./api/v1/authenticate/",
 					contentType:"application/json; charset=utf-8",
 					method: "POST",
-					data: JSON.stringify(data),
-					context: document.body
+					data: JSON.stringify(data)
 				}).done(function(response) {
 
 					if (response.success) {
 						console.log(response)
 						window.localStorage.setItem('token', response.token);
+						$.cookie("token", response.token);
 						window.scrollTo(1,1);
 						location.reload();
 					} else {
 						$('#login-message').text('Wrong username or password!');
-					} 
-
+					}
 
 				});
 			}

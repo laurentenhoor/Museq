@@ -662,7 +662,7 @@
 				method: "POST",
 				data : JSON.stringify(data),
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader('Authorization', window.localStorage.token);
+					xhr.setRequestHeader('Authorization', $.cookie("token"));
 				}
 			}).done(function(data) {
 				console.log(data);
@@ -678,7 +678,7 @@
 				contentType:"application/json; charset=utf-8",
 				method: "GET",
 				beforeSend : function(xhr) {
-					xhr.setRequestHeader('Authorization', window.localStorage.token);
+					xhr.setRequestHeader('Authorization', $.cookie("token"));
 				}
 			}).done(function(beat) {
 				
