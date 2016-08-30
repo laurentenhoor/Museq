@@ -12,10 +12,10 @@ html, body {
   -ms-user-select: none;
   user-select: none; 
   text-align: center;
-/*    background-image: url("tribute3.gif"); */
-/*    background-size:cover; */
-/*    background-repeat:no-repeat; */
-/*    background-position: center center; */
+   background-image: url("Aurora1.gif");
+   background-size:cover;
+   background-repeat:no-repeat;
+   background-position: center center;
   }
 
 h1 {
