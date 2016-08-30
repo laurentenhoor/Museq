@@ -10,7 +10,6 @@
 
 		var _self = this;
 
-
 		var $parent = $(el);
 		$parent.append($('<div>').attr('id', 'home-view'));
 		var $loginView = $parent.find('#home-view');
@@ -25,8 +24,6 @@
 		 */
 		this.initialize = function() {
 			_addEventListeners();
-
-
 
 			this.show();
 
@@ -84,12 +81,10 @@
 			function login(username, password) {
 
 				var data = {
-						name : username,
-						password : password
+					name : username,
+					password : password
 				};
 				
-				console.log(data);
-
 				$.ajax({
 					url: "./api/v1/authenticate/",
 					contentType:"application/json; charset=utf-8",
