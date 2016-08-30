@@ -22,7 +22,7 @@ app.use('/api/v1', api_v1_routes)
 
 app.use(express.static(__dirname + '/public'));
 
-var portNr = 3000;
+var portNr = 80;
 app.listen(portNr, function () {
   console.log('Museq listening on port '+portNr+'!');
 });
