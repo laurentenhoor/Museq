@@ -1,10 +1,12 @@
 TODOs before Facebook seeding
 
-=	Work in advance / Sanbox practice - Avoid waiting times
+=	Work in advance / Sandbox or practice - Avoid waiting times
 = 	Notification system - Improve game experience - Winning/Scoring
 	= Personal scoring
 	= View version tree
 = 	Feature request/ Feedback field
+=	Tag plan + KPIs in place
+	= What to measure? Engagement / time on website
 
 
 
@@ -17,9 +19,3 @@ User Flow Scenario:
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
 		Start contributing to perfect music now...
-			
-	
-
-
-
-
