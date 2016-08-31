@@ -1,13 +1,10 @@
-=	Save track
-	=	Login / Usermanagement
-= 	Load track
+TODOs before Facebook seeding
 
-=   Detect # of changes
-=	Submit for review system
-=	Vote tracks
-	=	Play track without view
-	=	Save votes
-= 	View version tree
+=	Work in advance / Sanbox practice - Avoid waiting times
+= 	Notification system - Improve game experience - Winning/Scoring
+	= Personal scoring
+	= View version tree
+
 
 
 User Flow Scenario:
@@ -19,18 +16,10 @@ User Flow Scenario:
 
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
-		Start your contribution to the perfect song...
+		Start contributing to perfect music...
 			
-	a)	[*Play 3 alternative songs*] Select your preference and improve it!
-		NEW-USER) Create account to store your improvement
-		=> Get an notification when an update is available  	
-	b)	
 	
-Vote and plays
 
 
-Todo airplane
--	Adjust viewport size of sequencer including text on top
--	Play on mobile phone - sound after touch
--	Login screen nice buttons + copy introduction story
--	Enable disable/enable of vote buttons for production mode
+
+
