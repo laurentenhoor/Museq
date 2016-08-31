@@ -2,8 +2,10 @@ module.exports = function(router, passport) {
 
 	var authUtil = require('./authUtil');
 	var Beat = require('../../models/beat');
+	var User = require('../../models/user');
 	var Status = require('../../models/status');
-
+	var notify = require('./notify');
+	
 	router.get('/beat', function(req, res) {
 		
 		console.log('GET /beat');
@@ -13,6 +15,55 @@ module.exports = function(router, passport) {
 		});
 
 	});
+	
+	function validateEmail(email) {
+	    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	    return re.test(email);
+	}
+	
+	router.post('/notify_me', passport.authenticate('jwt', { session: false}), function(req, res) {
+		
+		console.log(req)
+		
+		var user = authUtil.getUserFromRequest(req);
+		var email = req.body.email;
+		
+		if (!validateEmail(email)) {
+			res.json({success: false, msg: 'Please enter a valid email address.'});
+		}
+		
+		User.findOneAndUpdate({name: user}, {email: email}, function(err) {
+		
+			if (err) {
+				res.json({success: false, msg: 'Error'});
+			}
+			
+			Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
+
+				var newNotifications = status.notifications || [];
+				newNotifications.push(email);
+				
+				Status.update({_id: status._id}, {notifications : newNotifications}, function(err) {
+					
+					if (err) {
+						res.json({success: false});
+					} 
+					res.json({success: true});
+					
+
+				});
+			
+	
+				
+			});
+			
+			
+						
+		});
+	
+	});
+	
+	
 
 	router.get('/latest_winner', passport.authenticate('jwt', { session: false}), function(req, res) {
 
@@ -73,7 +124,15 @@ module.exports = function(router, passport) {
 							
 							// Winning beat!!
 							if(beat.votes.amount >= 2) {
-								Status.findOneAndUpdate({generation: beat.version.generation}, {winner: beatId}, function(err){});
+								
+								Status.findOne({generation: beat.version.generation}, function(err, status){
+									
+									notify.general(status.notifications);
+									
+									Status.findOneAndUpdate({generation: beat.version.generation}, {winner: beatId, notifications: null}, function(err){});
+									
+								});
+								
 								Beat.update({_id: beatId}, {'version.winner': true}, function(err) {});
 								new Status({generation: beat.version.generation+1}).save()
 							}
@@ -123,15 +182,21 @@ module.exports = function(router, passport) {
 
 				if (newVariant >= 3) {
 
-					Status.findOneAndUpdate({generation: beat.version.generation}, {voting : true}, function(err) {				
+					Status.findOne({generation: beat.version.generation}, function(err, status){
+						
+						notify.general(status.notifications);
 
-						if (err) {
-							res.json({success: true, msg: 'Successful saved beat BUT unable to store generation status.'});
-						}
-						res.json({success: true, msg: 'Successful saved beat and updated generation status.'});
+						Status.findOneAndUpdate({generation: beat.version.generation}, {voting : true, notifications : null}, function(err) {				
 
+							if (err) {
+								res.json({success: true, msg: 'Successful saved beat BUT unable to store generation status.'});
+							}
+							res.json({success: true, msg: 'Successful saved beat and updated generation status.'});
+
+						});
+						
 					});
-
+					
 				} else {
 					res.json({success: true, msg: 'Successful saved beat.'});
 				}

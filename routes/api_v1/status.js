@@ -3,6 +3,7 @@ module.exports = function(router, passport) {
 	var authUtil = require('./authUtil');
 	var Status = require('../../models/status');
 	var Beat = require('../../models/beat');
+	var User = require('../../models/user');
 
 	router.get('/status', passport.authenticate('jwt', { session: false}), function(req, res) {
 	
@@ -48,19 +49,28 @@ module.exports = function(router, passport) {
 					}
 				
 					Beat.findOne({'version.generation': status.generation-1, 'version.winner': true}, function(err, beat) {
+												
+						User.findOne({name: user}, function(err, user) {
+
+							var data = {
+									user: user.name,
+									generation: status.generation,
+									voting: status.voting,
+									voted: voted,
+									voters: voters,
+									variants: beats.length,
+									winnerPrevGen: beat.username,
+									mutated: mutated,
+									email: user.email
+								};
+							
+							console.log(data)
+							
+							res.json(data);	
+							
+						});
 						
-						var data = {
-								user: user,
-								generation: status.generation,
-								voting: status.voting,
-								voted: voted,
-								voters: voters,
-								variants: beats.length,
-								winnerPrevGen: beat.username,
-								mutated: mutated
-							};
 						
-						res.json(data);
 					})
 					
 					

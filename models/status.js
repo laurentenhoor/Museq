@@ -19,7 +19,8 @@ var StatusSchema = new Schema({
 	winner : {
 		type: Schema.Types.ObjectId,
 		default: null
-	}
+	}, 
+	notifications : [String]
 });
 
 module.exports = mongoose.model('Status', StatusSchema);

@@ -55,14 +55,42 @@
 				});
 
 				$('#waiting-vote').show();
-
-
 			} else {
 
 				$(".waiting-compositions-amount").text(3-status.variants);
 				$('#waiting-sequencer').show();
-
 			}
+			$('#waiting-notify').show();
+			
+			$('#notify-input').val(status.email);
+			
+			$('#notify-btn').on('click', function() {
+				
+				var data = {
+					email : $('#notify-input').val() 	
+				};
+				
+				console.log(data);
+				
+				$.ajax({
+					url: "./api/v1/notify_me/",
+					contentType:"application/json; charset=utf-8",
+					method: "POST",
+					data : JSON.stringify(data),
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader('Authorization', $.cookie("token"));
+					}
+				}).done(function(data) {
+					if (data.success) {
+						$('#waiting-notify').hide();
+					} else {
+						$('#notify-message').text(data.msg);
+					}
+					
+				});	
+				
+			});
+			
 
 			setInterval(function() {
 				location.reload();
