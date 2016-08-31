@@ -4,6 +4,7 @@ TODOs before Facebook seeding
 = 	Notification system - Improve game experience - Winning/Scoring
 	= Personal scoring
 	= View version tree
+= 	Feature request/ Feedback field
 
 
 
