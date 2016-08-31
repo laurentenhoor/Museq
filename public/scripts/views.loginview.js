@@ -95,7 +95,7 @@
 					if (response.success) {
 						console.log(response)
 						window.localStorage.setItem('token', response.token);
-						$.cookie("token", response.token);
+						$.cookie("token", response.token, {expires : 365});
 						window.scrollTo(1,1);
 						location.reload();
 					} else {
