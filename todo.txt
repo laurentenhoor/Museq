@@ -13,10 +13,9 @@ User Flow Scenario:
 	Explaination screen: 
 
 		Humanity is teaming up to create the one and only perfect music composition.
-
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
-		Start contributing to perfect music...
+		Start contributing to perfect music now...
 			
 	
 
