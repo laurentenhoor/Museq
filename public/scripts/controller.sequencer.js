@@ -642,7 +642,7 @@
 
 		updateViewport = function() {
 			console.log('viewport update;')
-			$('table').css('height', (98-($('#sequencer-header').outerHeight()/$(window).innerHeight()*100))+'%');
+			$('table').css('height', (97.5-($('#sequencer-header').outerHeight()/$(window).innerHeight()*100))+'%');
 		}
 		
 
