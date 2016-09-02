@@ -182,9 +182,8 @@
 //			window.localStorage.removeItem('token');
 			document.cookie = "";
 			
-			
 			if ($.cookie("token")) {
-
+				
 				$.ajax({
 					url: "./api/v1/status/",
 					contentType:"application/json; charset=utf-8",
@@ -193,9 +192,9 @@
 						xhr.setRequestHeader('Authorization', $.cookie("token"));
 					}
 				}).done(function(evolutionStatus) {
-
+					
 					console.log(evolutionStatus);
-
+					
 					if (evolutionStatus.voting) {
 						if (evolutionStatus.voted) {
 							_self.loadWaiting(evolutionStatus);
@@ -216,7 +215,7 @@
 								_self.loadSequencer(evolutionStatus);
 							});
 						}
-
+						
 					}
 
 				});
@@ -227,13 +226,12 @@
 					_self.loadSequencer(false);					
 				});
 				
-				
 			}
 
 		};
-
+		
 		this.initialize();
-
+		
 	};
 
 }());

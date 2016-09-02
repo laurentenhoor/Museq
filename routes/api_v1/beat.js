@@ -1,26 +1,27 @@
 module.exports = function(router, passport) {
-
-	var authUtil = require('./authUtil');
+	
 	var Beat = require('../../models/beat');
 	var User = require('../../models/user');
 	var Status = require('../../models/status');
+	
 	var notify = require('./notify');
-
+	var authUtil = require('./authUtil');
+	
 	router.get('/beat', function(req, res) {
 
 		console.log('GET /beat');
-
+		
 		Beat.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, data) {
 			res.json( data );
 		});
-
+		
 	});
-
+	
 	function validateEmail(email) {
 		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(email);
 	}
-
+	
 	router.post('/notify_me', passport.authenticate('jwt', { session: false}), function(req, res) {
 
 		var user = authUtil.getUserFromRequest(req);
@@ -50,16 +51,16 @@ module.exports = function(router, passport) {
 
 
 		});
-
+		
 		
 	});
 
 
 
 	router.get('/latest_winner', function(req, res) {
-
+		
 		console.log('GET /latest_winner');
-
+		
 		Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
 
 			var previousGeneration = status.generation-1;
