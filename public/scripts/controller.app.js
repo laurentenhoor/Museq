@@ -82,7 +82,7 @@
 					}
 				}).done(function(data) {
 					if (data.success) {
-						$('#waiting-notify').hide();
+						$('#get-notification-part').hide();
 					} else {
 						$('#notify-message').text(data.msg);
 					}
