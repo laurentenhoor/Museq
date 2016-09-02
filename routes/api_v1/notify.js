@@ -50,10 +50,5 @@ function sendMail(mail) {
 	    smtpTransport.close();
 	    
 	});	
-
 	
 }
-
-
-
-
