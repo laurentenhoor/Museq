@@ -30,10 +30,10 @@
   	
   	<div id="sequencer-intro" class="navigation" style="color:white; margin:10px; display:none;>
 	  	<span id="header-text">
-	  	<br>
-	  	<span id="prev-gen-winner"></span> created the winning variant of generation <span class="previous-generation">0</span>.
-	  	<br><b>Please contribute to the next generation!</b>
-	  	<br>
+		  	<br>
+		  	<span id="prev-gen-winner"></span> created the winning variant of generation <span class="previous-generation">0</span>.
+		  	<br><b>Please contribute to the next generation!</b>
+		  	<br>
 	  	</span>
 	  	<br>
 	  	<button id="sequencer-start-btn" >Start</button>
@@ -75,11 +75,8 @@
   	<div id="waiting-vote" class="navigation" style="color:white; margin:10px; display: none;">
   		<span id="header-text">
   		<br>
-  		We are currently waiting for at least <span class="waiting-votes-amount"></span> more vote(s) for generation <span class="generation"></span>.
-  		<br><br>
-  		<b>You (<span class="username"></span>) already contributed.</b>
-  		<br><br>
-  		Wait here or come back whenever you want.  
+  		We are currently waiting for at least <span class="waiting-votes-amount"></span> more vote(s) for generation <span class="generation">
+  		</span>.
   		</span>
   	</div>
   	
@@ -87,21 +84,28 @@
   		<span id="header-text">
   		<br>
   		We are waiting for <span class="waiting-compositions-amount"></span> more variants of generation <span class="generation"></span> before the natural selection process will start.
-  		<br><br>
-  		<b>You (<span class="username"></span>) already contributed.</b>
-  		<br><br>
-  		Wait here or come back whenever you want.  
-  		</span>
   		</span>
   	</div>
   	
   	<div id="waiting-notify" style="color:white; margin:10px; display:none;">
+  		<br>
+  		<b>You (<span class="username"></span>) already contributed.</b>
+  		<br>
+  		Wait here or subscribe to be notified when ready.
+  		<br>
   		<br><br>
-  		<b>Get a notification, only once!</b><br><br>
+  		<big><i><b>Get a one-time notification!</b></i></big>
+  		<br><small><br></small>
   		<small>Email </small><input class="form" id="notify-input" type="email"></input><br>
   		<small><span id="notify-message" style="color:red;"></span><br></small>
   		<button id="notify-btn">Notify me</button>
   		<br>
+  		<br>
+  		<br>
+  		<big><i><b>Play around...</b></i></big> 
+  		<br>
+  		<button id="play-around-btn">Play</button>
+  		
   	</div>
   	
     <table style="display:none;">

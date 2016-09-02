@@ -91,10 +91,20 @@
 				
 			});
 			
+			
+			$('#play-around-btn').on('click', function() {
+				$('#waiting-sequencer').hide();
+				$('#waiting-vote').hide();
+				$('#waiting-notify').hide();
+				_self.loadSequencer(false);
+				$('#try-header').hide();
+				
+			});
+			
 
-			setInterval(function() {
-				location.reload();
-			}, 30000)
+//			setInterval(function() {
+//				location.reload();
+//			}, 30000)
 
 		};
 
