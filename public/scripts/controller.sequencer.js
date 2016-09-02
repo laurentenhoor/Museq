@@ -641,6 +641,7 @@
 		};
 
 		updateViewport = function() {
+			console.log('viewport update;')
 			$('table').css('height', (97-($('#sequencer-header').outerHeight()/$(window).innerHeight()*100))+'%');
 		}
 		
@@ -699,6 +700,7 @@
 //				setInterval(function() {_self.start()}, 1000);
 				_self.start();
 				
+				updateViewport();
 			});
 
 		};

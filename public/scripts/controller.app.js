@@ -144,7 +144,7 @@
 			dummy.client = 4;
 			_onGetInstrument(dummy);
 
-			_sequencerView.scrollInstrument();
+//			_sequencerView.scrollInstrument();
 
 			_sequencer.loadBeat();
 
