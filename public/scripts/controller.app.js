@@ -106,9 +106,6 @@
 			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
 			
-			$('.current-generation').text(evolutionStatus.generation-1);
-			$('#sequencer-header').show();
-			$('table').show();
 
 			_sequencer.on(museq.enums.Events.SEQUENCER_BEAT, function(beat) {
 				_sequencerView.drawPlayhead(beat);
@@ -116,15 +113,27 @@
 			_sequencer.on(museq.enums.Events.LOAD_PATTERN, function(instruments) {
 				_sequencerView.redrawNotes(instruments);
 			});
+			
+			
+			if (evolutionStatus) {
+				$('.current-generation').text(evolutionStatus.generation-1);
+				$('#sequencer-header').show();
+				$('table').show();
 
-			_sequencerView.on(museq.enums.Events.SAVE_BEAT, function(instruments) {
+				_sequencerView.on(museq.enums.Events.SAVE_BEAT, function(instruments) {
 
-				console.log(evolutionStatus);
+					console.log(evolutionStatus);
 
-				_sequencer.saveBeat(evolutionStatus.generation);
-				console.log('Event SAVE BEAT triggered.');
-			});
+					_sequencer.saveBeat(evolutionStatus.generation);
+					console.log('Event SAVE BEAT triggered.');
+				});
 
+			} else {
+				$('#try-header').show();
+				$('#login').hide();
+			}
+			
+		
 			var dummy = {};
 			dummy.client = 1;
 			_onGetInstrument(dummy);
@@ -214,6 +223,11 @@
 
 			} else {
 				_self.loadLogin();
+				$('#try-btn').on('click', function() {
+					_self.loadSequencer(false);					
+				});
+				
+				
 			}
 
 		};

@@ -56,7 +56,7 @@ module.exports = function(router, passport) {
 
 
 
-	router.get('/latest_winner', passport.authenticate('jwt', { session: false}), function(req, res) {
+	router.get('/latest_winner', function(req, res) {
 
 		console.log('GET /latest_winner');
 

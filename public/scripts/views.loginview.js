@@ -40,6 +40,8 @@
 		var _addEventListeners = function() {
 			$('#login').show();
 
+		
+			
 			$('#login-btn').on('click', function() {
 
 				var username = $('#username-input').val();
