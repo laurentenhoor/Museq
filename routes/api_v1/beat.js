@@ -23,8 +23,6 @@ module.exports = function(router, passport) {
 	
 	router.post('/notify_me', passport.authenticate('jwt', { session: false}), function(req, res) {
 		
-		console.log(req)
-		
 		var user = authUtil.getUserFromRequest(req);
 		var email = req.body.email;
 		
@@ -39,11 +37,8 @@ module.exports = function(router, passport) {
 			}
 			
 			Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
-
-				var newNotifications = status.notifications || [];
-				newNotifications.push(email);
 				
-				Status.update({_id: status._id}, {notifications : newNotifications}, function(err) {
+				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err) {
 					
 					if (err) {
 						res.json({success: false});
