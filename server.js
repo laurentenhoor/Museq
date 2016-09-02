@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 var passport = require('passport');
 app.use(passport.initialize());
 
-app.set('view engine', 'jade');
-
 var frontend_routes = require('./routes/frontend');
 var api_v1_routes = require('./routes/api_v1');
 

@@ -3,11 +3,11 @@ var router = express.Router();
 
 // define the home page route
 router.get('/', function (req, res) {
-	  res.render('index');
+	res.sendfile('./public/index.html');
 });
 
 router.get('/logout', function(req, res) {
-	res.render('logout');
+	res.sendfile('./public/logout.html');
 });
 
 module.exports = router;
