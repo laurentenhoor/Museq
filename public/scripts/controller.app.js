@@ -243,7 +243,7 @@
 					}
 
 				}).fail(function (jqXHR, textStatus, errorThrown) {
-				    window.location = '/logout';
+//				    window.location = '/logout';
 			    });
 
 			} else {
