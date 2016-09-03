@@ -242,7 +242,9 @@
 						
 					}
 
-				});
+				}).fail(function (jqXHR, textStatus, errorThrown) {
+				    window.location = '/logout';
+			    });
 
 			} else {
 				_self.loadLogin();

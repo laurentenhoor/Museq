@@ -15,7 +15,7 @@ html, body {
    background-image: url("http://bestanimations.com/Earth&Space/Earth/earth2/large-earth-flyover-animated-gif-1.gif");
    background-size:cover;
    background-repeat:no-repeat;
-   background-position: center center;
+/*    background-position: center center; */
    background-attachment: fixed;
   }
 
