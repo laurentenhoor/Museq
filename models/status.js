@@ -20,7 +20,10 @@ var StatusSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		default: null
 	}, 
-	notifications : [String]
+	notifications : {
+		type: [String],
+		default: []
+	}
 });
 
 module.exports = mongoose.model('Status', StatusSchema);
