@@ -242,9 +242,10 @@
 						
 					}
 
-				}).fail(function (jqXHR, textStatus, errorThrown) {
+				});
+//				.fail(function (jqXHR, textStatus, errorThrown) {
 //				    window.location = '/logout';
-			    });
+//			    });
 
 			} else {
 				_self.loadLogin();
