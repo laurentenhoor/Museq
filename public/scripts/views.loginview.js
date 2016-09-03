@@ -71,6 +71,7 @@
 				}).done(function(response) {
 
 					if (response.success) {
+						fbq('track', "CompleteRegistration");
 						login(username, password);
 					} else {
 						$('#login-message').text(response.msg);
