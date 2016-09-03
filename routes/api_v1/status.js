@@ -52,6 +52,14 @@ module.exports = function(router, passport) {
 												
 						User.findOne({name: user}, function(err, user) {
 
+							var notification = false; 
+							console.log(user.email)
+							if (!user.email) {
+								notification = false;
+							} else if (status.notifications.indexOf(user.email) > -1) {
+								notification = true;
+							}
+							
 							var data = {
 									user: user.name,
 									generation: status.generation,
@@ -61,7 +69,8 @@ module.exports = function(router, passport) {
 									variants: beats.length,
 									winnerPrevGen: beat.username,
 									mutated: mutated,
-									email: user.email
+									email: user.email,
+									notification: notification
 								};
 							
 							console.log(data)

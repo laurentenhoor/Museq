@@ -46,7 +46,6 @@
 			$(".username").text(status.user);
 			$(".generation").text(status.generation);
 
-
 			if (status.voting ) {
 
 				$(".waiting-votes-amount").text(1);
@@ -63,6 +62,16 @@
 			$('#waiting-notify').show();
 			
 			$('#notify-input').val(status.email);
+			
+			
+			$('#notification-email').text(status.email);
+			if (status.notification) {
+				$('#get-notification-part').hide();
+				$('#have-notification-part').show();
+			} else {
+				$('#get-notification-part').show();
+				$('#have-notification-part').hide();
+			}
 			
 			$('#notify-btn').on('click', function() {
 				
@@ -84,6 +93,8 @@
 
 					if (data.success) {
 						$('#get-notification-part').hide();
+						$('#have-notification-part').show();
+						$('#notification-email').text(data.email);
 					} else {
 						console.log(data)
 						$('#notify-message').text(data.msg);
@@ -100,6 +111,7 @@
 				$('#waiting-notify').hide();
 				_self.loadSequencer(false);
 				$('#try-header').hide();
+				$('#play-around-header').show();
 				
 			});
 			
