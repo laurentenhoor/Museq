@@ -66,6 +66,8 @@
 			
 			$('#notify-btn').on('click', function() {
 				
+				alert('test?')
+				
 				var data = {
 					email : $('#notify-input').val() 	
 				};

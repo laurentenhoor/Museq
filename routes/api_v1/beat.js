@@ -24,6 +24,7 @@ module.exports = function(router, passport) {
 	
 	router.post('/notify_me', passport.authenticate('jwt', { session: false}), function(req, res) {
 
+		
 		var user = authUtil.getUserFromRequest(req);
 		var email = req.body.email;
 
