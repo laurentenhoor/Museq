@@ -204,7 +204,6 @@
 		this.initialize = function() {
 
 //			window.localStorage.removeItem('token');
-			document.cookie = "";
 			
 			if ($.cookie("token")) {
 				

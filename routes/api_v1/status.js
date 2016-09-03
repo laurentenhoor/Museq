@@ -5,7 +5,7 @@ module.exports = function(router, passport) {
 	var Beat = require('../../models/beat');
 	var User = require('../../models/user');
 
-	router.get('/status', passport.authenticate('jwt', { session: false}), function(req, res) {
+	router.get('/status', passport.authenticate('jwt', {session: false}), function(req, res) {
 	
 		console.log('GET /status');
 		
