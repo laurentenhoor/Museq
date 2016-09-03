@@ -36,14 +36,16 @@ module.exports = function(router, passport) {
 
 			if (err) {
 				res.json({success: false, msg: 'Error'});
+				return;
 			}
 
 			Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
 
-				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err) {
+				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err, msg) {
 
 					if (err) {
-						res.json({success: false});
+						res.json({success: false, msg: msg});
+						return;
 					} 
 					res.json({success: true});
 

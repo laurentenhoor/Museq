@@ -81,9 +81,8 @@
 						xhr.setRequestHeader('Authorization', $.cookie("token"));
 					}
 				}).done(function(data) {
+
 					if (data.success) {
-						alert('henk')
-						
 						$('#get-notification-part').hide();
 					} else {
 						$('#notify-message').text(data.msg);
