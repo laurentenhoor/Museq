@@ -645,6 +645,7 @@
 			
 			var headerHeight = $('#try-header').is(":visible") ? $('#try-header').outerHeight() : 0;
 			headerHeight = headerHeight + $('#sequencer-header').is(":visible") ? $('#sequencer-header').outerHeight() : 0;
+			headerHeight = headerHeight + $('#play-around-header').is(":visible") ? $('#play-around-header').outerHeight() : 0;
 			
 			console.log(headerHeight)
 			
@@ -654,6 +655,9 @@
 			}
 			if ($('#sequencer-header').is(":visible")) {
 				$('#sequencer-header').css('margin-top', -headerHeight);
+			}
+			if ($('#play-around-header').is(":visible")) {
+				$('#play-around-header').css('margin-top', -headerHeight);
 			}
 			
 			$('table').css('height', 'none');

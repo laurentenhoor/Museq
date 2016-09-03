@@ -111,7 +111,7 @@
 				$('#waiting-notify').hide();
 				_self.loadSequencer(false);
 				$('#try-header').hide();
-				$('#play-around-header').show();
+				$('#play-around-header').show();	
 				
 			});
 			
@@ -127,7 +127,7 @@
 
 			_sequencer = new museq.Sequencer();
 
-			_sequencerView = new museq.views.SequencerView($(_el)).initialize().hide();
+			_sequencerView = new museq.views.SequencerView($(_el)).initialize()//.hide();
 			_sequencerView.on(museq.enums.Events.NOTE, _sequencer.updateNote)
 			
 
