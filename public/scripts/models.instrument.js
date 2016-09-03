@@ -24,7 +24,7 @@
     this.numTracksLoaded = 0;
 
     var _self = this;
-//    var _readyCallback = null;
+    var _readyCallback = null;
     var _isLoaded = false;
     var _synth = null; 
 
@@ -65,7 +65,7 @@
       if (_self.numTracksLoaded == _self.tracks.length) {
         console.log('All samples loaded.');
         _isLoaded = true;
-//        _readyCallback();
+        _readyCallback();
       }
     };
 
