@@ -85,6 +85,7 @@
 					if (data.success) {
 						$('#get-notification-part').hide();
 					} else {
+						console.log(data)
 						$('#notify-message').text(data.msg);
 					}
 					

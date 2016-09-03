@@ -30,6 +30,7 @@ module.exports = function(router, passport) {
 
 		if (!validateEmail(email)) {
 			res.json({success: false, msg: 'Please enter a valid email address.'});
+			return;
 		}
 
 		User.findOneAndUpdate({name: user}, {email: email}, function(err) {
@@ -41,10 +42,11 @@ module.exports = function(router, passport) {
 
 			Status.findOne({}, {}, { sort: { 'created' : -1 } }, function(err, status) {
 
-				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err, msg) {
+				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err, status) {
 
+					console.log(err)
 					if (err) {
-						res.json({success: false, msg: msg});
+						res.json({success: false, msg: err});
 						return;
 					} 
 					res.json({success: true});

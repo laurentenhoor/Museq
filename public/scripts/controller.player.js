@@ -55,8 +55,6 @@
 		};
 
 
-		
-		
 
 		this.createInstruments = function() {
 			_instruments = [];
