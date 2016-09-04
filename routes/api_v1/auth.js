@@ -10,7 +10,7 @@ module.exports = function(router, passport) {
 	
 	router.post('/signup', function(req, res) {
 		if (!req.body.name || !req.body.password) {
-			res.json({success: false, msg: 'Please pass name and password.'});
+			res.json({success: false, msg: 'Please enter username and password.'});
 		} else {
 			var newUser = new User({
 				name: req.body.name,
@@ -34,7 +34,7 @@ module.exports = function(router, passport) {
 			if (err) throw err;
 
 			if (!user) {
-				res.send({success: false, msg: 'Authentication failed. User not found.'});
+				res.send({success: false, msg: 'User not found.'});
 			} else {
 				// check if password matches
 				user.comparePassword(req.body.password, function (err, isMatch) {
@@ -44,7 +44,7 @@ module.exports = function(router, passport) {
 						// return the information including token as JSON
 						res.json({success: true, token: 'JWT ' + token});
 					} else {
-						res.send({success: false, msg: 'Authentication failed. Wrong password.'});
+						res.send({success: false, msg: 'Wrong password.'});
 					}
 				});
 			}

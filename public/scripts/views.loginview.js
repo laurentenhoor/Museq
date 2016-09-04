@@ -102,7 +102,7 @@
 						window.scrollTo(1,1);
 						location.reload();
 					} else {
-						$('#login-message').text('Wrong username or password!');
+						$('#login-message').text(response.msg);
 					}
 
 				});
