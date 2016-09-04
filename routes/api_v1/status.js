@@ -43,6 +43,10 @@ module.exports = function(router, passport) {
 
 						// Look for logged in username in the authors and voters of beats
 						beats.forEach(function(beat) {
+
+							if (!beat.votes.users) {
+								beat.votes.users = [];
+							}
 							if (beat.votes.users.indexOf(user) > -1) {
 								voted = true;
 							}
@@ -63,6 +67,10 @@ module.exports = function(router, passport) {
 
 							User.findOne({name: user}, function(err, user) {
 
+								if (!status.notifications) {
+									status.notifications = [];
+								}
+								
 								var notification = false; 
 								console.log(user.email)
 								if (!user.email) {

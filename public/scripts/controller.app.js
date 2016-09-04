@@ -217,7 +217,7 @@
 					}
 				}).done(function(evolutionStatus) {
 					
-					console.log(evolutionStatus);
+					alert(evolutionStatus);
 					
 					if (evolutionStatus.success == false) {
 						 window.location = '/logout';
