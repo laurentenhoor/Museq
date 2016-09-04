@@ -44,7 +44,6 @@ module.exports = function(router, passport) {
 
 				Status.update({_id: status._id}, {$addToSet: { notifications: email }}, function(err, status) {
 
-					console.log(err)
 					if (err) {
 						res.json({success: false, msg: err.msg});
 						return;

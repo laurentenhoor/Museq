@@ -78,9 +78,7 @@
 				var data = {
 					email : $('#notify-input').val() 	
 				};
-				
-				console.log(data);
-				
+			
 				$.ajax({
 					url: "./api/v1/notify_me/",
 					contentType:"application/json; charset=utf-8",
@@ -90,7 +88,6 @@
 						xhr.setRequestHeader('Authorization', $.cookie("token"));
 					}
 				}).done(function(data) {
-					console.log(data)
 					if (data.success) {
 						$('#get-notification-part').hide();
 						$('#have-notification-part').show();
