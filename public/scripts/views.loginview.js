@@ -44,6 +44,7 @@
 			
 			$('#login-btn').on('click', function() {
 
+				$('#login-message').text("");
 				var username = $('#username-input').val();
 				var password = $('#password-input').val();
 				
@@ -53,6 +54,7 @@
 
 			$('#join-btn').on('click', function() {
 
+				$('#login-message').text("");
 				var username = $('#username-input').val();
 				var password = $('#password-input').val();
 
