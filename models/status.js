@@ -20,9 +20,7 @@ var StatusSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		default: null
 	}, 
-	notifications : {
-		type: [String],
-		default: []
+	notifications : [String]
 	}
 });
 
