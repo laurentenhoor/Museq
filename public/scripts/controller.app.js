@@ -218,7 +218,9 @@
 					
 					console.log(evolutionStatus);
 					
-					if (evolutionStatus.voting) {
+					if (evolutionStatus.success == false) {
+						 window.location = '/logout';
+					} else if (evolutionStatus.voting) {
 						if (evolutionStatus.voted) {
 							_self.loadWaiting(evolutionStatus);
 							
@@ -242,9 +244,6 @@
 					}
 
 				});
-//				.fail(function (jqXHR, textStatus, errorThrown) {
-//				    window.location = '/logout';
-//			    });
 
 			} else {
 				_self.loadLogin();

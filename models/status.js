@@ -21,7 +21,6 @@ var StatusSchema = new Schema({
 		default: null
 	}, 
 	notifications : [String]
-	}
 });
 
 module.exports = mongoose.model('Status', StatusSchema);
