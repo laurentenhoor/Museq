@@ -203,7 +203,8 @@
 
 		this.initialize = function() {
 
-//			window.localStorage.removeItem('token');
+//			console.log(window.localStorage.getItem('token'));
+//			console.log($.cookie("token"))
 			
 			if ($.cookie("token")) {
 				

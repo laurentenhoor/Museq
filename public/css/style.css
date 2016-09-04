@@ -13,11 +13,16 @@ html, body {
   user-select: none; 
   text-align: center;
    background-image: url("http://bestanimations.com/Earth&Space/Earth/earth2/large-earth-flyover-animated-gif-1.gif");
+/*    background-image: url("http://i.imgur.com/X6bDgpK.gif"); */
    background-size:cover;
    background-repeat:no-repeat;
 /*    background-position: center center; */
-   background-attachment: fixed;
+/*    background-attachment: fixed; */	
   }
+
+.spacing-bottom {
+	height:50px;
+}
 
 h1 {
 	font-size:1.15em;
