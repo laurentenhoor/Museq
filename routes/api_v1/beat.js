@@ -46,7 +46,7 @@ module.exports = function(router, passport) {
 
 					console.log(err)
 					if (err) {
-						res.json({success: false, msg: err});
+						res.json({success: false, msg: err.msg});
 						return;
 					} 
 					res.json({success: true});
@@ -136,7 +136,7 @@ module.exports = function(router, passport) {
 						Status.findOne({generation: beat.version.generation}, function(err, status){
 
 							notify.general(status.notifications);
-							Status.findOneAndUpdate({generation: beat.version.generation}, {winner: beatId, notifications: null}, function(err){});
+							Status.findOneAndUpdate({generation: beat.version.generation}, {winner: beatId, notifications: []}, function(err){});
 
 						});
 
@@ -187,7 +187,7 @@ module.exports = function(router, passport) {
 
 						notify.general(status.notifications);
 
-						Status.findOneAndUpdate({generation: beat.version.generation}, {voting : true, notifications : null}, function(err) {				
+						Status.findOneAndUpdate({generation: beat.version.generation}, {voting : true, notifications : []}, function(err) {				
 
 							if (err) {
 								res.json({success: true, msg: 'Successful saved beat BUT unable to store generation status.'});

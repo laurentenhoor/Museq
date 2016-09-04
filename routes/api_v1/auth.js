@@ -34,7 +34,7 @@ module.exports = function(router, passport) {
 			if (err) throw err;
 
 			if (!user) {
-				res.send({success: false, msg: 'User not found.'});
+				res.send({success: false, msg: 'Username does not exist.'});
 			} else {
 				// check if password matches
 				user.comparePassword(req.body.password, function (err, isMatch) {
