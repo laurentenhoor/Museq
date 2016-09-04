@@ -49,7 +49,7 @@ module.exports = function(router, passport) {
 						res.json({success: false, msg: err.msg});
 						return;
 					} 
-					res.json({success: true});
+					res.json({success: true, email: email});
 
 				});
 			});

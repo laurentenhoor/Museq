@@ -90,7 +90,7 @@
 						xhr.setRequestHeader('Authorization', $.cookie("token"));
 					}
 				}).done(function(data) {
-
+					console.log(data)
 					if (data.success) {
 						$('#get-notification-part').hide();
 						$('#have-notification-part').show();
