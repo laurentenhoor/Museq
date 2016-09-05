@@ -1,10 +1,12 @@
 /* @import url(http://fonts.googleapis.com/css?family=Lobster); */
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
 html, body {
   background: black;
   padding: 0;
   margin: 0;
   height: 100%;
-  font-family: helvetica neue, helvetica;
+  font-family: 'Open Sans', sans-serif;
+/*   font-family: helvetica neue, helvetica; */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
