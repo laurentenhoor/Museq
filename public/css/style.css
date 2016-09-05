@@ -15,9 +15,10 @@ html, body {
    background-image: url("http://bestanimations.com/Earth&Space/Earth/earth2/large-earth-flyover-animated-gif-1.gif");
 /*    background-image: url("http://i.imgur.com/X6bDgpK.gif"); */
 /*    background-image: url("http://i.imgur.com/jBiooG6.gif"); */
-   background-size:cover;
+/*    background-size:cover; */
+   background-size: auto 100%;
    background-repeat:no-repeat;
-/*    background-position: center center; */
+   background-position: center center;
 /*    background-attachment: fixed; */	
 
   }
@@ -159,12 +160,13 @@ button:disabled {
 
 #pattern-editor,
 #museq {
-  display: block; 
+  display: inline-block; 
     position: absolute;
     right: 0;
     left: 0;
     top: 0;
     bottom: 0;
+    
   }
   #pattern-editor table,
   #museq table {
