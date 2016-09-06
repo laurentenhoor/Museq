@@ -67,7 +67,8 @@
 							$('button.vote').prop('disabled', false);
 						}
 					});
-					$currBtn.text('...');
+					$currBtn.text('');
+					$currBtn.append($('<i class="fa fa-volume-up" style="font-size:1.1em;"></i>'));
 				});
 				
 				$voteBtn.on('click', function(){
