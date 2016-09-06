@@ -28,6 +28,10 @@ html, body {
 
   }
 
+input{
+  border-radius:5px;
+}
+
 .spacing-bottom {
 	height:50px;
 }
