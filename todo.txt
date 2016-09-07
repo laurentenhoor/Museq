@@ -19,3 +19,10 @@ User Flow Scenario:
 		We have bundled the power of both evolution and democracy into 'Museq'. A tool that allows you to mutate music and lets the crowd 'naturally' select the strongest composition of every successive generation!	
 		
 		Start contributing to perfect music now...
+		
+		
+Facebook mappings:
+TRY				fbq('track', 'ViewContent');
+SIGNUP			fbq('track', 'CompleteRegistration');
+LOGIN			fbq('track', 'Lead');
+SAVE TRACK		fbq('track', 'InitiateCheckout');

@@ -95,9 +95,14 @@
 					data: JSON.stringify(data)
 				}).done(function(response) {
 					if (response.success) {
+					
 						$.cookie("token", response.token, {expires : 365});
 						window.scrollTo(1,1);
+					
+						fbq('track', 'Lead');
+						
 						location.reload();
+						
 					} else {
 						$('#login-message').text(response.msg);
 					}

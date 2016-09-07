@@ -688,6 +688,7 @@
 				}
 			}).done(function(data) {
 				console.log(data);
+				fbq('track', 'InitiateCheckout');
 				location.reload();
 			});	
 
