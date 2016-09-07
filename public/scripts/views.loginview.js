@@ -38,9 +38,7 @@
 		 * @function
 		 */
 		var _addEventListeners = function() {
-			$('#login').show();
-
-		
+			$('#login').show();	
 			
 			$('#login-btn').on('click', function() {
 

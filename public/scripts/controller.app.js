@@ -246,9 +246,9 @@
 			} else {
 				_self.loadLogin();
 				$('#try-btn').on('click', function() {
-					_self.loadSequencer(false);					
+					_self.loadSequencer(false);	
+					fbq('track', 'ViewContent');
 				});
-				
 			}
 
 		};
