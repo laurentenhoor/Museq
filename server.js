@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var nodalytics = require('nodalytics');
+
+app.use(nodalytics('UA-82777201-2'));
 
 var mongoose = require('mongoose');
 var config = require('./config/database');
