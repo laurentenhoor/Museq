@@ -1,7 +1,7 @@
 /* @import url(http://fonts.googleapis.com/css?family=Lobster); */
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 /* @import 'https://fonts.googleapis.com/css?family=Roboto'; */
-html, body, input, button {
+html, body {
   background: black;
   padding: 0;
   margin: 0;
@@ -25,7 +25,11 @@ html, body, input, button {
    background-repeat:no-repeat;
    background-position: center center;
 /*    background-attachment: fixed; */	
-
+  }
+  
+  input, button {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
   }
 
 input{
