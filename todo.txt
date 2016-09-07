@@ -7,7 +7,7 @@ TODOs before Facebook seeding
 = 	Feature request/ Feedback field
 =	Tag plan + KPIs in place
 	= What to measure? Engagement / time on website
-
+=	Waiting poll!!! -> prioritizing backlog!
 
 
 User Flow Scenario:
