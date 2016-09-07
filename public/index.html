@@ -215,7 +215,13 @@
     }, false);
 
 	new museq.App('#museq')
-
+	
+	var bgImg = new Image();
+	bgImg.onload = function(){
+	   document.body.style.backgroundImage = 'url(' + bgImg.src + ')';
+	};
+	bgImg.src = 'http://bestanimations.com/Earth&Space/Earth/earth2/large-earth-flyover-animated-gif-1.gif';
+	
    </script>
 
 </body>
