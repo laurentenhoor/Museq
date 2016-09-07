@@ -1,7 +1,7 @@
 /* @import url(http://fonts.googleapis.com/css?family=Lobster); */
 @import 'https://fonts.googleapis.com/css?family=Open+Sans';
 /* @import 'https://fonts.googleapis.com/css?family=Roboto'; */
-html, body {
+html, body, input, button {
   background: black;
   padding: 0;
   margin: 0;
