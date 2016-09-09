@@ -22,7 +22,7 @@ User Flow Scenario:
 		
 		
 Facebook mappings:
-TRY				fbq('track', 'ViewContent');
+PLAY SEQ		fbq('track', 'ViewContent');
+SHOW LOGIN		fbq('track', 'Lead');
 SIGNUP			fbq('track', 'CompleteRegistration');
-LOGIN			fbq('track', 'Lead');
 SAVE TRACK		fbq('track', 'InitiateCheckout');

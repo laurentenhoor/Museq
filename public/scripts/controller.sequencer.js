@@ -22,6 +22,9 @@
 		var _tempo = 120;
 		var _loopLength = 16;
 		var _started = false;
+		
+		var _firstClick = true;
+		
 		var _lastDrawTime = -1;
 		
 		var _initialBeat = null;
@@ -731,25 +734,33 @@
 				window.addEventListener('click', function(event) {
 					event.preventDefault();
 					
-					$('.header-volume-icon').show();
-					$('.fa-youtube-play').hide();
+					if (_firstClick) {
+						
+						_firstClick = false;
+						
+						fbq('track', 'ViewContent');
+						alert('firstClick!');
 					
-					// create empty buffer
-					var buffer = _context.createBuffer(1, 1, 22050);
-					var source = _context.createBufferSource();
-					source.buffer = buffer;
-
-					// connect to output (your speakers)
-					source.connect(_context.destination);
-
-					// play the file
-					
-					if (!source.start) {
-						source.start = source.noteOn;
+						$('.header-volume-icon').show();
+						$('.fa-youtube-play').hide();
+						
+						// create empty buffer
+						var buffer = _context.createBuffer(1, 1, 22050);
+						var source = _context.createBufferSource();
+						source.buffer = buffer;
+	
+						// connect to output (your speakers)
+						source.connect(_context.destination);
+	
+						// play the file
+						
+						if (!source.start) {
+							source.start = source.noteOn;
+						}
+						source.start(0);
+						
+						_self.start();
 					}
-					source.start(0);
-					
-					_self.start();
 
 				}, false);
 				

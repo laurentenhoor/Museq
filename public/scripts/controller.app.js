@@ -254,6 +254,7 @@
 					$('table').hide();
 					$('#museq').css('padding-top', 0);
 					$('#try-header').hide();
+					fbq('track', 'Lead');
 				});
 				
 //				$('#try-btn').on('click', function() {

@@ -97,10 +97,7 @@
 					if (response.success) {
 					
 						$.cookie("token", response.token, {expires : 365});
-						window.scrollTo(1,1);
-					
-						fbq('track', 'Lead');
-						
+						window.scrollTo(1,1);						
 						location.reload();
 						
 					} else {
