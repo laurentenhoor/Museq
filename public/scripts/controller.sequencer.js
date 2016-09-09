@@ -321,6 +321,10 @@
 			} catch (e) {
 				alert("No Web Audio API support");
 			}
+			
+			
+			
+			
 
 			// Create master gain control.
 			_masterGainNode = _context.createGain();
@@ -452,7 +456,7 @@
 			_availableInstruments.shift();
 
 			// Initialize the instrument and call start when ready.
-			nextInstrument.initialize(this.start);
+			nextInstrument.initialize();
 			// Pass the context the instrument.
 			nextInstrument.setup(_context);
 
@@ -478,7 +482,7 @@
 			_availableInstruments.splice(randomIndex, 1);
 
 			// Initialize the instrument and call start when ready.
-			randomInstrument.initialize(this.start);
+			randomInstrument.initialize();
 			// Pass the context the instrument.
 			randomInstrument.setup(_context);
 
@@ -504,7 +508,7 @@
 
 		this.schedule = function() {
 			var currentTime = _context.currentTime;
-
+			
 			var currentTimeDraw = Date.now()/1000;
 
 			// The sequence starts at startTime, so normalize currentTime so that it's 0 at the start of the sequence.
@@ -720,7 +724,34 @@
 				updateViewport();
 				
 //				setInterval(function() {_self.start()}, 1000);
-				_self.start();
+				
+//				alert('start')
+//				_self.start();
+				
+				window.addEventListener('click', function(event) {
+					event.preventDefault();
+					
+					$('#try-header-volume-icon').show();
+					$('.fa-youtube-play').hide();
+					
+					// create empty buffer
+					var buffer = _context.createBuffer(1, 1, 22050);
+					var source = _context.createBufferSource();
+					source.buffer = buffer;
+
+					// connect to output (your speakers)
+					source.connect(_context.destination);
+
+					// play the file
+					
+					if (!source.start) {
+						source.start = source.noteOn;
+					}
+					source.start(0);
+					
+					_self.start();
+
+				}, false);
 				
 				updateViewport();
 			});

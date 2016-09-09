@@ -172,6 +172,8 @@
 			_sequencerView.show();
 
 		};
+		
+
 
 		this.loadVote = function(status) {
 
@@ -244,11 +246,20 @@
 				});
 
 			} else {
-				_self.loadLogin();
-				$('#try-btn').on('click', function() {
-					_self.loadSequencer(false);	
-					fbq('track', 'ViewContent');
+				
+				_self.loadSequencer(false);
+				
+				$('#join-revolution').on('click', function() {
+					_self.loadLogin();
+					$('table').hide();
+					$('#museq').css('padding-top', 0);
+					$('#try-header').hide();
 				});
+				
+//				$('#try-btn').on('click', function() {
+//					_self.loadSequencer(false);	
+//					fbq('track', 'ViewContent');
+//				});
 			}
 
 		};
