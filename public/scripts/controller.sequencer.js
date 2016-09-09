@@ -731,7 +731,7 @@
 				window.addEventListener('click', function(event) {
 					event.preventDefault();
 					
-					$('#try-header-volume-icon').show();
+					$('.header-volume-icon').show();
 					$('.fa-youtube-play').hide();
 					
 					// create empty buffer
