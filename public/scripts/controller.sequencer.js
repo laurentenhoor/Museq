@@ -696,6 +696,7 @@
 			}).done(function(data) {
 				console.log(data);
 				fbq('track', 'InitiateCheckout');
+				ga('send', 'event', 'Museq', 'saveBeat');
 				location.reload();
 			});	
 
@@ -739,7 +740,7 @@
 						_firstClick = false;
 						
 						fbq('track', 'ViewContent');
-						alert('firstClick!');
+						ga('send', 'event', 'Museq', 'testSequencer');
 					
 						$('.header-volume-icon').show();
 						$('.fa-youtube-play').hide();

@@ -22,7 +22,7 @@ User Flow Scenario:
 		
 		
 Facebook mappings:
-PLAY SEQ		fbq('track', 'ViewContent');
-SHOW LOGIN		fbq('track', 'Lead');
-SIGNUP			fbq('track', 'CompleteRegistration');
-SAVE TRACK		fbq('track', 'InitiateCheckout');
+PLAY SEQ		fbq('track', 'ViewContent'); 			ga('send', 'event', 'Museq', 'testSequencer');
+SHOW LOGIN		fbq('track', 'Lead');		 			ga('send', 'event', 'Museq', 'showLogin');
+SIGNUP			fbq('track', 'CompleteRegistration');	ga('send', 'event', 'Museq', 'signUp');
+SAVE TRACK		fbq('track', 'InitiateCheckout');		ga('send', 'event', 'Museq', 'saveBeat');
