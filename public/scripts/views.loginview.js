@@ -72,6 +72,7 @@
 
 					if (response.success) {
 						fbq('track', "CompleteRegistration");
+						ga('send', 'event', 'Museq', 'signUp');
 						login(username, password);
 					} else {
 						$('#login-message').text(response.msg);

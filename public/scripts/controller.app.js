@@ -253,8 +253,11 @@
 					_self.loadLogin();
 					$('table').hide();
 					$('#museq').css('padding-top', 0);
+					
 					$('#try-header').hide();
+					
 					fbq('track', 'Lead');
+					ga('send', 'event', 'Museq', 'showLogin');
 				});
 				
 //				$('#try-btn').on('click', function() {
